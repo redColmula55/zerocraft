@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "group": "wrench",
+  "key": {
+    "a": {
+      "item": "zerocraft:scarlet_crystal_ingot"
+    }
+  },
+  "pattern": [
+    "a a",
+    "aaa",
+    " a "
+  ],
+  "result": {
+    "item": "zerocraft:wrench"
+  },
+  "show_notification": true
+}

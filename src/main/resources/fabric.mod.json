@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "zerocraft",
+	"version": "${version}",
+	"name": "ZeroCraft - 齐零工艺",
+	"description": "ZeroCraft - 齐零工艺 \n 齐零科技 荣誉出品 Powered by Zero-Alignment \n （开玩笑的，本mod和赤潮官方没有关系，仅为粉丝二创，任何内容均不代表官方立场 \n 齐零工艺，将赤潮ZERA带到MC中来！",
+	"authors": [
+		"redColmula55"
+	],
+	"contact": {
+		"homepage": "https://github.com/redColmula55",
+		"sources": "https://github.com/redColmula55/zerocraft"
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/zerocraft/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"rc55.mc.zerocraft.ZeroCraft"
+		],
+		"client": [
+			"rc55.mc.zerocraft.ZeroCraftClient"
+		],
+		"fabric-datagen": [
+			"rc55.mc.zerocraft.ZeroCraftDataGenerator"
+		]
+	},
+	"mixins": [
+		"zeroera.mixins.json"
+	],
+	"accessWidener": "zerocraft.accesswidener",
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

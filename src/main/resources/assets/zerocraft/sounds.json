@@ -1,0 +1,11 @@
+{
+  "wrench_use": {
+    "sounds": ["zerocraft:wrench_use"]
+  },
+  "music_disc.ost_red_tide": {
+    "sounds": ["zerocraft:records/ost_red_tide"]
+  },
+  "music_disc.image_seek": {
+    "sounds": ["zerocraft:records/image_seek"]
+  }
+}

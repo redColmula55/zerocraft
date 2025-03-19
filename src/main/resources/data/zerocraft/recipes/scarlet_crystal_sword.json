@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "combat",
+  "group": "swords",
+  "key": {
+    "a": {
+      "item": "zerocraft:scarlet_crystal_ingot"
+    },
+    "b": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "a",
+    "a",
+    "b"
+  ],
+  "result": {
+    "item": "zerocraft:scarlet_crystal_sword"
+  },
+  "show_notification": true
+}

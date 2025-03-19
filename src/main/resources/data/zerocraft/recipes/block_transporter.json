@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "group": "block_transporter",
+  "key": {
+    "a": {
+      "item": "zerocraft:scarlet_crystal_ingot"
+    },
+    "b": {
+      "item": "zerocraft:scarlet_crystal_block"
+    },
+    "c": {
+      "item": "zerocraft:scarlet_crystal_pickaxe"
+    }
+  },
+  "pattern": [
+    "bab",
+    "aca",
+    "bab"
+  ],
+  "result": {
+    "item": "zerocraft:block_transporter"
+  },
+  "show_notification": true
+}

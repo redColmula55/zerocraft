@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "group": "axes",
+  "key": {
+    "a": {
+      "item": "zerocraft:scarlet_crystal_ingot"
+    },
+    "b": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "aa",
+    "ab",
+    " b"
+  ],
+  "result": {
+    "item": "zerocraft:scarlet_crystal_axe"
+  },
+  "show_notification": true
+}

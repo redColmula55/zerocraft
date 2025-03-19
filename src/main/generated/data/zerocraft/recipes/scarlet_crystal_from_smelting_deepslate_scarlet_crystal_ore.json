@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "scarlet_crystal_from_ore",
+  "ingredient": {
+    "item": "zerocraft:deepslate_scarlet_crystal_ore"
+  },
+  "result": "zerocraft:scarlet_crystal"
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "tools",
+  "group": "hoes",
+  "key": {
+    "a": {
+      "item": "zerocraft:scarlet_crystal_ingot"
+    },
+    "b": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "aa",
+    "b ",
+    "b "
+  ],
+  "result": {
+    "item": "zerocraft:scarlet_crystal_hoe"
+  },
+  "show_notification": true
+}

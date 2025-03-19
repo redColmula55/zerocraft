@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "combat",
+  "group": "boots",
+  "key": {
+    "a": {
+      "item": "zerocraft:scarlet_crystal_ingot"
+    },
+    "b": {
+      "item": "minecraft:piston"
+    }
+  },
+  "pattern": [
+    "a a",
+    "a a",
+    "b b"
+  ],
+  "result": {
+    "item": "zerocraft:scarlet_crystal_boots"
+  },
+  "show_notification": true
+}

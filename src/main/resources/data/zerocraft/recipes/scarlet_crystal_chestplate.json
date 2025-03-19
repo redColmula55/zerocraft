@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "combat",
+  "group": "chestplates",
+  "key": {
+    "a": {
+      "item": "zerocraft:scarlet_crystal_ingot"
+    },
+    "b": {
+      "item": "minecraft:elytra"
+    }
+  },
+  "pattern": [
+    "aba",
+    "aaa",
+    "aaa"
+  ],
+  "result": {
+    "item": "zerocraft:scarlet_crystal_chestplate"
+  },
+  "show_notification": true
+}

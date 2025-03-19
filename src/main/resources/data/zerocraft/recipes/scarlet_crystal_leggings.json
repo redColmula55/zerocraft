@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "combat",
+  "group": "leggings",
+  "key": {
+    "a": {
+      "item": "zerocraft:scarlet_crystal_ingot"
+    },
+    "b": {
+      "item": "minecraft:ender_chest"
+    }
+  },
+  "pattern": [
+    "aaa",
+    "aba",
+    "a a"
+  ],
+  "result": {
+    "item": "zerocraft:scarlet_crystal_leggings"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "combat",
+  "group": "helmets",
+  "key": {
+    "a": {
+      "item": "zerocraft:scarlet_crystal_ingot"
+    }
+  },
+  "pattern": [
+    "aaa",
+    "a a"
+  ],
+  "result": {
+    "item": "zerocraft:scarlet_crystal_helmet"
+  },
+  "show_notification": true
+}
