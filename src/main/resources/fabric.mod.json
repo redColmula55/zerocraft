@@ -3,15 +3,16 @@
 	"id": "zerocraft",
 	"version": "${version}",
 	"name": "ZeroCraft - 齐零工艺",
-	"description": "ZeroCraft - 齐零工艺 \n 齐零科技 荣誉出品 Powered by Zero-Alignment \n （开玩笑的，本mod和赤潮官方没有关系，仅为粉丝二创，任何内容均不代表官方立场 \n 齐零工艺，将赤潮ZERA带到MC中来！",
+	"description": "ZeroCraft - 齐零工艺 \n 齐零科技 荣誉出品 Powered by Zero-Alignment \n （开玩笑的，本mod和赤潮官方没有关系，仅为粉丝二创，任何内容均不代表官方立场 \n 齐零工艺是一个以赤潮ZeroERA为背景制作的mod，引入了诸多赤潮ZeroERA的特性以及一些小工具。",
 	"authors": [
 		"redColmula55"
 	],
 	"contact": {
 		"homepage": "https://github.com/redColmula55",
-		"sources": "https://github.com/redColmula55/zerocraft"
+		"sources": "https://github.com/redColmula55/zerocraft",
+		"issues": "https://github.com/redColmula55/zerocraft/issues"
 	},
-	"license": "GPL-3.0",
+	"license": "GPL-3.0 & CC-BY-NC-SA 4.0",
 	"icon": "assets/zerocraft/icon.png",
 	"environment": "*",
 	"entrypoints": {

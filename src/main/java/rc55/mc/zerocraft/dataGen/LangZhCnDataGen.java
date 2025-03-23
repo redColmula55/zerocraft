@@ -21,7 +21,7 @@ public class LangZhCnDataGen extends FabricLanguageProvider {
         translationBuilder.add(ZeroCraftBlocks.SCARLET_CRYSTAL_ORE,"赤晶矿");
 
         translationBuilder.add(ZeroCraftItems.DISC_OST_RED_TIDE,"音乐唱片(OST)");
-        translationBuilder.add("item.zerocraft.music_disc_ost_red_tide.desc","YoMio-Music - Red Tide");
+        translationBuilder.add(ZeroCraftItems.DISC_OST_RED_TIDE.getTranslationKey()+".desc","YoMio-Music - Red Tide");
         translationBuilder.add(ZeroCraftItems.DISK_IMAGE_SEEK,"音乐唱片(印象曲)");
         translationBuilder.add(ZeroCraftItems.DISK_IMAGE_SEEK.getTranslationKey()+".desc","洛少爷 - 寻溯");
 
@@ -34,11 +34,11 @@ public class LangZhCnDataGen extends FabricLanguageProvider {
         translationBuilder.add("item.zerocraft.scarlet_crystal_mining_tools.mode.hint","按 %s 切换模式");
 
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD,"赤晶剑");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_sword.mode.switch","切换到 %s 模式.");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_sword.mode.current","当前为 %s 模式");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_sword.mode.hint","按 %s 切换模式");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_sword.mode.frost","火焰");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_sword.mode.flame","冰霜");
+        translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD.getTranslationKey()+".mode.switch","切换到 %s 模式.");
+        translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD.getTranslationKey()+".mode.current","当前为 %s 模式");
+        translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD.getTranslationKey()+".mode.hint","按 %s 切换模式");
+        translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD.getTranslationKey()+".mode.frost","火焰");
+        translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD.getTranslationKey()+".mode.flame","冰霜");
 
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_HELMET, "赤晶头盔");
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_HELMET.getTranslationKey()+".night_vision.off", "夜视模式：关");

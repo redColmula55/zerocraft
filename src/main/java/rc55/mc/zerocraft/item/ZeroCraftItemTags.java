@@ -7,11 +7,12 @@ import net.minecraft.util.Identifier;
 import rc55.mc.zerocraft.ZeroCraft;
 
 public class ZeroCraftItemTags {
+    //杂项
+    public static final TagKey<Item> ZEROCRAFT_DISCS = register("zerocraft_music_discs");//唱片
+    //工具
+    public static final TagKey<Item> UNENCHANTABLES = register("unenchantables");//不可附魔的工具
 
-    public static final TagKey<Item> ZEROCRAFT_DISCS = register("zerocraft_music_discs");
-
-    public static final TagKey<Item> ELYTRA_LIKE_ITEMS = register("elytra_like_items");
-
+    //注册用
     private static TagKey<Item> register(String id) {
         return TagKey.of(RegistryKeys.ITEM, new Identifier(ZeroCraft.MODID, id));
     }

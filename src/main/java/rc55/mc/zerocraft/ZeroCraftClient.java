@@ -4,6 +4,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import rc55.mc.zerocraft.client.ZeroCraftKeyBinds;
+import rc55.mc.zerocraft.client.ZeroCraftRenderers;
+import rc55.mc.zerocraft.client.model.ZeroCraftModelPredicateProvider;
 
 @Environment(EnvType.CLIENT)
 public class ZeroCraftClient implements ClientModInitializer {
@@ -11,7 +13,9 @@ public class ZeroCraftClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ZeroCraft.LOGGER.info("ZeroCraft client side loading...");
-        ZeroCraftKeyBinds.regKeyBinds();
+        ZeroCraftKeyBinds.regKeyBinds();//按键绑定
+        ZeroCraftRenderers.addRenderer();//渲染
+        ZeroCraftModelPredicateProvider.addModelPredicate();//模型谓词-物品材质用
         ZeroCraft.LOGGER.info("ZeroCraft client side loaded.");
     }
 }

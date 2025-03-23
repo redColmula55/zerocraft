@@ -3,6 +3,7 @@ package rc55.mc.zerocraft.item.armor;
 import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -94,5 +95,9 @@ public class ScarletCrystalChestplateItem extends ArmorItem implements FabricEly
     //发送消息
     private static void sendMessage(PlayerEntity player, Text message) {
         ((ServerPlayerEntity)player).sendMessageToClient(message, true);
+    }
+    //是否允许披风渲染
+    public static boolean allowCapeRender(AbstractClientPlayerEntity abstractClientPlayerEntity) {
+        return !abstractClientPlayerEntity.getInventory().getArmorStack(2).getOrCreateNbt().getBoolean("Fly");
     }
 }

@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
+    "zerocraft:scarlet_crystal_helmet",
+    "zerocraft:scarlet_crystal_chestplate",
+    "zerocraft:scarlet_crystal_leggings",
     "zerocraft:scarlet_crystal_boots"
   ]
 }

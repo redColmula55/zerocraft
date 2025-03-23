@@ -25,7 +25,7 @@ public class ZeroCraftItems {
     public static final Item SCARLET_CRYSTAL_HOE = register("scarlet_crystal_hoe", new ScarletCrystalHoeItem());
     public static final Item WRENCH = register("wrench", new WrenchItem());
     public static final Item BLOCK_TRANSPORTER = register("block_transporter", new BlockTransporterItem());
-    //
+    //盔甲
     public static final Item SCARLET_CRYSTAL_HELMET = register("scarlet_crystal_helmet", new ScarletCrystalHelmetItem());
     public static final Item SCARLET_CRYSTAL_CHESTPLATE = register("scarlet_crystal_chestplate", new ScarletCrystalChestplateItem());
     public static final Item SCARLET_CRYSTAL_LEGGINGS = register("scarlet_crystal_leggings", new ScarletCrystalLeggingsItem());

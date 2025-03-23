@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "zerocraft:item/scarlet_crystal_sword"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "zerocraft:item/scarlet_crystal_sword_blocking"
+    }
+  ]
+}

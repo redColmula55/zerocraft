@@ -27,7 +27,7 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.register(ZeroCraftItems.SCARLET_CRYSTAL, Models.GENERATED);
         itemModelGenerator.register(ZeroCraftItems.SCARLET_CRYSTAL_INGOT, Models.GENERATED);
 
-        itemModelGenerator.register(ZeroCraftItems.SCARLET_CRYSTAL_SWORD, Models.HANDHELD);
+        //itemModelGenerator.register(ZeroCraftItems.SCARLET_CRYSTAL_SWORD, Models.HANDHELD);
         itemModelGenerator.register(ZeroCraftItems.SCARLET_CRYSTAL_PICKAXE, Models.HANDHELD);
         itemModelGenerator.register(ZeroCraftItems.SCARLET_CRYSTAL_AXE, Models.HANDHELD);
         itemModelGenerator.register(ZeroCraftItems.SCARLET_CRYSTAL_SHOVEL, Models.HANDHELD);

@@ -27,6 +27,20 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 .add(ZeroCraftItems.DISC_OST_RED_TIDE)
                 .add(ZeroCraftItems.DISK_IMAGE_SEEK);
 
-        getOrCreateTagBuilder(ItemTags.TRIMMABLE_ARMOR).add(ZeroCraftItems.SCARLET_CRYSTAL_BOOTS);
+        getOrCreateTagBuilder(ItemTags.TRIMMABLE_ARMOR)
+                .add(ZeroCraftItems.SCARLET_CRYSTAL_HELMET)
+                .add(ZeroCraftItems.SCARLET_CRYSTAL_CHESTPLATE)
+                .add(ZeroCraftItems.SCARLET_CRYSTAL_LEGGINGS)
+                .add(ZeroCraftItems.SCARLET_CRYSTAL_BOOTS);
+
+        getOrCreateTagBuilder(ItemTags.SWORDS).add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD);
+        getOrCreateTagBuilder(ItemTags.PICKAXES).add(ZeroCraftItems.SCARLET_CRYSTAL_PICKAXE);
+        getOrCreateTagBuilder(ItemTags.AXES).add(ZeroCraftItems.SCARLET_CRYSTAL_AXE);
+        getOrCreateTagBuilder(ItemTags.SHOVELS).add(ZeroCraftItems.SCARLET_CRYSTAL_SHOVEL);
+        getOrCreateTagBuilder(ItemTags.HOES).add(ZeroCraftItems.SCARLET_CRYSTAL_HOE);
+
+        getOrCreateTagBuilder(ZeroCraftItemTags.UNENCHANTABLES)
+                .add(ZeroCraftItems.BLOCK_TRANSPORTER)
+                .add(ZeroCraftItems.WRENCH);
     }
 }

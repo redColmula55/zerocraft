@@ -34,11 +34,11 @@ public class LangEnDataGen extends FabricLanguageProvider {
         translationBuilder.add("item.zerocraft.scarlet_crystal_mining_tools.mode.hint","Press %s to switch mode");
 
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD,"Scarlet Sword");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_sword.mode.switch","Switched to %s mode.");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_sword.mode.current","Currently %s mode");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_sword.mode.hint","Press %s to switch mode");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_sword.mode.frost","Flame");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_sword.mode.flame","Frost");
+        translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD.getTranslationKey()+".mode.switch","Switched to %s mode.");
+        translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD.getTranslationKey()+".mode.current","Currently %s mode");
+        translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD.getTranslationKey()+".mode.hint","Press %s to switch mode");
+        translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD.getTranslationKey()+".mode.frost","Flame");
+        translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD.getTranslationKey()+".mode.flame","Frost");
 
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_HELMET, "Scarlet Helmet");
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_HELMET.getTranslationKey()+".night_vision.off", "Night Vision turned off.");
