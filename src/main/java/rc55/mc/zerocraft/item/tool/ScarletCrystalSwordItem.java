@@ -69,10 +69,11 @@ public class ScarletCrystalSwordItem extends SwordItem implements Vanishable {
     //物品lore
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context){
+        super.appendTooltip(stack, world, tooltip, context);
+
         tooltip.add(Text.translatable(this.getTranslationKey()+".mode.hint", new Object[]{ZeroCraftKeyBinds.TOOL_MODE_SWITCH_KEY.getBoundKeyTranslationKey()}).formatted(Formatting.GRAY));
 
         byte mode = stack.getOrCreateNbt().getByte("mode");
-        //tooltip.add(Text.of("Trans key: "+this.getTranslationKey()));
         switch (mode){
             case 1:
                 tooltip.add(Text.translatable(this.getTranslationKey()+".mode.current", new Object[]{Text.translatable(FROST_MODE_TRANS_KEY)}));
@@ -87,7 +88,6 @@ public class ScarletCrystalSwordItem extends SwordItem implements Vanishable {
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
-        PlayerEntity player = (PlayerEntity) entity;
         //仅服务端
         if (!world.isClient){
             //服务端接收包后处理

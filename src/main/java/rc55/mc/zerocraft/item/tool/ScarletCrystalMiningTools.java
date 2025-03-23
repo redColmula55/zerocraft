@@ -1,21 +1,25 @@
 package rc55.mc.zerocraft.item.tool;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.item.TooltipContext;
+import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
-import rc55.mc.zerocraft.ZeroCraft;
 import rc55.mc.zerocraft.client.ZeroCraftKeyBinds;
 
 import java.util.List;
@@ -31,21 +35,25 @@ public class ScarletCrystalMiningTools {
         for(int i = 0; i < stack.getEnchantments().size(); ++i) {
             NbtCompound enchantmentEntry = enchantments.getCompound(i);
             String id = enchantmentEntry.getString("id");
-            //enchantments.remove(enchantmentEntry);
             if (Objects.equals(id, "minecraft:silk_touch") || Objects.equals(id, "minecraft:fortune")){
                 enchantments.remove(enchantmentEntry);
             }
         }
-        //切换模式
-        if (mode == 1){
-            stack.addEnchantment(Enchantments.SILK_TOUCH,1);
-            nbtCompound.putByte("mode", (byte) 2);
-            return Enchantments.SILK_TOUCH.getTranslationKey();
-        } else {
-            stack.addEnchantment(Enchantments.FORTUNE,3);
-            nbtCompound.putByte("mode", (byte) 1);
-            return Enchantments.FORTUNE.getTranslationKey();
-        }
+        return switch (mode) {
+            case 1 -> {
+                nbtCompound.putByte("mode", (byte) 2);
+                yield Enchantments.SILK_TOUCH.getTranslationKey();
+            }
+            case 2 -> {
+                nbtCompound.putByte("mode", (byte) 1);
+                yield Enchantments.FORTUNE.getTranslationKey();
+            }
+            default -> {
+                //重置无效状态
+                nbtCompound.putByte("mode", (byte) 1);
+                yield Enchantments.FORTUNE.getTranslationKey();
+            }
+        };
     }
     //物品lore
     public static void appendTooltip(ItemStack stack, List<Text> tooltip) {
@@ -59,12 +67,15 @@ public class ScarletCrystalMiningTools {
             case 2:
                 tooltip.add(Text.translatable(universalTranslationKey+".mode.current", new Object[]{Text.translatable(Enchantments.SILK_TOUCH.getTranslationKey())}));
                 break;
+            case 0://没有模式
+                break;
+            default://无效模式
+                tooltip.add(Text.translatable(universalTranslationKey+".mode.current", new Object[]{Text.translatable(universalTranslationKey+".mode.unknown")}));
         }
     }
     //每刻执行
     //检测是否按下按键
     public static void inventoryTick(Item item, World world, Entity entity, Identifier packId) {
-        PlayerEntity player = (PlayerEntity) entity;
         //仅服务端
         if (!world.isClient){
             //服务端接收包后处理
@@ -80,11 +91,35 @@ public class ScarletCrystalMiningTools {
                             sendMessage(serverPlayer, Text.translatable(universalTranslationKey+".mode.switch", new Object[]{Text.translatable(setMode(serverStack))}));
                         }
                     }
-                    //sendMessage(serverPlayer, Text.of("[debug/server] Axe received pack."));//调试信息
                 });
             });
-            //调试信息
-            //if (player.getStackInHand(player.getActiveHand()) == stack){ sendMessage(player, Text.of("[debug/server] Holding Axe.")); }
+        }
+    }
+    //挖掘后掉落物品
+    public static void postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
+        if (!world.isClient){
+            NbtCompound nbtCompound = stack.getOrCreateNbt();
+            byte mode = nbtCompound.getByte("mode");//当前模式 幸运1 精准2
+            LootContextParameterSet.Builder builder = new LootContextParameterSet.Builder((ServerWorld) world)
+                    .add(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos))
+                    .add(LootContextParameters.BLOCK_STATE, state)
+                    .add(LootContextParameters.THIS_ENTITY, miner);
+            ItemStack tool = stack.getItem().getDefaultStack();
+            //模式
+            switch (mode){
+                case 1:
+                    tool.addEnchantment(Enchantments.FORTUNE, 3);
+                    builder.add(LootContextParameters.TOOL, tool);
+                    break;
+                case 2:
+                    tool.addEnchantment(Enchantments.SILK_TOUCH, 1);
+                    builder.add(LootContextParameters.TOOL, tool);
+                    break;
+            }
+            //掉落
+            for (ItemStack drop : state.getDroppedStacks(builder)){
+                miner.dropStack(drop);
+            }
         }
     }
     //通用翻译键

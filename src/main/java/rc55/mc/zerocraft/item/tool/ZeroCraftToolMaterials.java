@@ -7,7 +7,7 @@ import rc55.mc.zerocraft.item.ZeroCraftItems;
 import java.util.function.Supplier;
 
 public enum ZeroCraftToolMaterials implements ToolMaterial {
-    SCARLET_CRYSTAL(4,2031,12.0f,4.0f,22,() -> Ingredient.ofItems(ZeroCraftItems.SCARLET_CRYSTAL_INGOT));
+    SCARLET_CRYSTAL(5,2031,12.0f,4.0f,22,() -> Ingredient.ofItems(ZeroCraftItems.SCARLET_CRYSTAL_INGOT));
 
     private final int miningLevel;
     private final int itemDurability;
