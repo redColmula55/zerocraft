@@ -1,8 +1,8 @@
 {
   "type": "minecraft:blasting",
   "category": "misc",
-  "cookingtime": 200,
-  "experience": 0.7,
+  "cookingtime": 100,
+  "experience": 0.3,
   "group": "scarlet_crystal_from_ore",
   "ingredient": {
     "item": "zerocraft:scarlet_crystal_ore"

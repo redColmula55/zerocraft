@@ -24,12 +24,10 @@ public class RecipeDataGen extends FabricRecipeProvider {
     @Override
     public void generate(Consumer<RecipeJsonProvider> consumer) {
         offerReversibleCompactingRecipes(consumer, RecipeCategory.MISC, ZeroCraftItems.SCARLET_CRYSTAL_INGOT, RecipeCategory.MISC, ZeroCraftBlocks.SCARLET_CRYSTAL_BLOCK);
-        //offerReversibleCompactingRecipes(consumer, RecipeCategory.MISC, ZeroCraftItems.SCARLET_CRYSTAL, RecipeCategory.MISC, ZeroCraftItems.SCARLET_CRYSTAL_INGOT);
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ZeroCraftItems.SCARLET_CRYSTAL_INGOT).input(ZeroCraftItems.SCARLET_CRYSTAL, 9).criterion(hasItem(ZeroCraftItems.SCARLET_CRYSTAL), conditionsFromItem(ZeroCraftItems.SCARLET_CRYSTAL)).offerTo(consumer, new Identifier(ZeroCraft.MODID,"scarlet_crystal_ingot_from_crystals"));
-        //offer2x2CompactingRecipe(consumer, RecipeCategory.MISC, ZeroCraftItems.SCARLET_CRYSTAL_INGOT, ZeroCraftItems.SCARLET_CRYSTAL);
 
         offerSmelting(consumer, SCARLET_CRYSTAL_ORES, RecipeCategory.MISC, ZeroCraftItems.SCARLET_CRYSTAL, 0.7f, 200, "scarlet_crystal_from_ore");
-        offerBlasting(consumer, SCARLET_CRYSTAL_ORES, RecipeCategory.MISC, ZeroCraftItems.SCARLET_CRYSTAL, 0.7f, 200, "scarlet_crystal_from_ore");
+        offerBlasting(consumer, SCARLET_CRYSTAL_ORES, RecipeCategory.MISC, ZeroCraftItems.SCARLET_CRYSTAL, 0.3f, 100, "scarlet_crystal_from_ore");
     }
 }

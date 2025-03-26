@@ -1,7 +1,14 @@
 {
   "block.zerocraft.deepslate_scarlet_crystal_ore": "Deepslate Scarlet Crystal Ore",
+  "block.zerocraft.fluid_tank": "Fluid Tank",
   "block.zerocraft.scarlet_crystal_block": "Scarlet Crystal Block",
   "block.zerocraft.scarlet_crystal_ore": "Scarlet Crystal Ore",
+  "block.zerocraft.scarlet_water": "Scarlet Tide Polluted Water",
+  "container.zerocraft.fluid_tank": "Fluid Tank",
+  "container.zerocraft.fluid_tank.carrying": "Stored %s mB of %s",
+  "container.zerocraft.fluid_tank.empty": "(Empty)",
+  "enchantment.zerocraft.beheading": "Beheading",
+  "enchantment.zerocraft.vampire": "Vampire",
   "item.zerocraft.block_transporter": "Block Transporter",
   "item.zerocraft.block_transporter.damaged": "Transporter damaged!",
   "item.zerocraft.block_transporter.hint": "Right click to pick up block, right click again to place down.",
@@ -36,6 +43,7 @@
   "item.zerocraft.scarlet_crystal_sword.mode.frost": "Flame",
   "item.zerocraft.scarlet_crystal_sword.mode.hint": "Press %s to switch mode",
   "item.zerocraft.scarlet_crystal_sword.mode.switch": "Switched to %s mode.",
+  "item.zerocraft.scarlet_water_bucket": "Scarlet Tide Polluted Water Bucket",
   "item.zerocraft.wrench": "Wrench",
   "item.zerocraft.wrench.damaged": "Wrench damaged!",
   "item.zerocraft.wrench.empty": "Selected block doesn't have any property!",
@@ -49,5 +57,6 @@
   "key.zerocraft.leggings_inventory": "Leggings inventory",
   "key.zerocraft.tool_mode_switch": "Tool mode switch key",
   "zerocraft.group.items": "ZeroCraft - Items",
+  "zerocraft.group.machines": "ZeroCraft - Machines",
   "zerocraft.group.tools": "ZeroCraft - Tools & Weapons"
 }

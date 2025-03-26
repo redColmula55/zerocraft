@@ -15,8 +15,4 @@ public abstract class EnchantmentMixin {
     public boolean isAcceptableItem(EnchantmentTarget instance, Item item){
         return !item.getDefaultStack().isIn(ZeroCraftItemTags.UNENCHANTABLES) && instance.isAcceptableItem(item);
     }
-    /*@Inject(at = @At("RETURN"), method = "isAcceptableItem", cancellable = true)
-    public void isAcceptableItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir){
-        cir.setReturnValue(cir.getReturnValueZ() && !stack.isIn(ZeroCraftItemTags.UNENCHANTABLES));
-    }*/
 }

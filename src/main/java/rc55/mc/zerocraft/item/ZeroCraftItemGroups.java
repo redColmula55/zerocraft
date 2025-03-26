@@ -16,6 +16,7 @@ public class ZeroCraftItemGroups {
     //注册键
     public static final RegistryKey<ItemGroup> ITEMS = getKey("group_items");
     public static final RegistryKey<ItemGroup> TOOLS = getKey("group_tools");
+    public static final RegistryKey<ItemGroup> MACHINES = getKey("group_machines");
     //注册键提供
     private static RegistryKey<ItemGroup> getKey(String id) {
         return RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(ZeroCraft.MODID, id));
@@ -34,6 +35,7 @@ public class ZeroCraftItemGroups {
                     entries.add(ZeroCraftBlocks.DEEPSLATE_SCARLET_CRYSTAL_ORE);
                     entries.add(ZeroCraftItems.DISC_OST_RED_TIDE);
                     entries.add(ZeroCraftItems.DISK_IMAGE_SEEK);
+                    entries.add(ZeroCraftItems.SCARLET_WATER_BUCKET);
         })).build());
 
         Registry.register(Registries.ITEM_GROUP, TOOLS, FabricItemGroup.builder()
@@ -51,6 +53,13 @@ public class ZeroCraftItemGroups {
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_CHESTPLATE);
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_LEGGINGS);
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_BOOTS);
+                })).build());
+
+        Registry.register(Registries.ITEM_GROUP, MACHINES, FabricItemGroup.builder()
+                .displayName(Text.translatable("zerocraft.group.machines"))
+                .icon(() -> new ItemStack(ZeroCraftBlocks.FLUID_TANK))
+                .entries(((displayContext, entries) -> {
+                    entries.add(ZeroCraftBlocks.FLUID_TANK);
                 })).build());
 
         ZeroCraft.LOGGER.info("ZeroCraft item group loaded.");

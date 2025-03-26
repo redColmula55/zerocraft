@@ -4,8 +4,11 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import rc55.mc.zerocraft.block.ZeroCraftBlocks;
 import rc55.mc.zerocraft.client.ZeroCraftKeyBinds;
+import rc55.mc.zerocraft.enchantment.ZeroCraftEnchantments;
 import rc55.mc.zerocraft.item.ZeroCraftItemGroups;
 import rc55.mc.zerocraft.item.ZeroCraftItems;
+import rc55.mc.zerocraft.item.tool.ScarletCrystalMiningTools;
+import rc55.mc.zerocraft.screen.FluidTankScreenHandler;
 
 public class LangZhCnDataGen extends FabricLanguageProvider {
     public LangZhCnDataGen(FabricDataOutput dataOutput) {
@@ -19,19 +22,27 @@ public class LangZhCnDataGen extends FabricLanguageProvider {
         translationBuilder.add(ZeroCraftBlocks.SCARLET_CRYSTAL_BLOCK,"赤晶块");
         translationBuilder.add(ZeroCraftBlocks.DEEPSLATE_SCARLET_CRYSTAL_ORE,"深板岩赤晶矿");
         translationBuilder.add(ZeroCraftBlocks.SCARLET_CRYSTAL_ORE,"赤晶矿");
+        translationBuilder.add(ZeroCraftBlocks.SCARLET_WATER, "赤潮污染水");
+
+        translationBuilder.add(ZeroCraftBlocks.FLUID_TANK, "流体储罐");
+        translationBuilder.add(FluidTankScreenHandler.TANK_TRANS_KEY, "流体储罐");
+        translationBuilder.add(FluidTankScreenHandler.TANK_EMPTY_TRANS_KEY, "(空)");
+        translationBuilder.add(FluidTankScreenHandler.TANK_CARRYING_TRANS_KEY, "当前装有 %s mB 的%s");
 
         translationBuilder.add(ZeroCraftItems.DISC_OST_RED_TIDE,"音乐唱片(OST)");
         translationBuilder.add(ZeroCraftItems.DISC_OST_RED_TIDE.getTranslationKey()+".desc","YoMio-Music - Red Tide");
         translationBuilder.add(ZeroCraftItems.DISK_IMAGE_SEEK,"音乐唱片(印象曲)");
         translationBuilder.add(ZeroCraftItems.DISK_IMAGE_SEEK.getTranslationKey()+".desc","洛少爷 - 寻溯");
 
+        translationBuilder.add(ZeroCraftItems.SCARLET_WATER_BUCKET,"赤潮污染水桶");
+
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_PICKAXE,"赤晶稿");
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_AXE,"赤晶斧");
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SHOVEL,"赤晶锹");
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_HOE,"赤晶锄");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_mining_tools.mode.switch","切换到 %s 模式.");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_mining_tools.mode.current","当前为 %s 模式");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_mining_tools.mode.hint","按 %s 切换模式");
+        translationBuilder.add(ScarletCrystalMiningTools.toolsTranslationKey+".mode.switch","切换到 %s 模式.");
+        translationBuilder.add(ScarletCrystalMiningTools.toolsTranslationKey+".mode.current","当前为 %s 模式");
+        translationBuilder.add(ScarletCrystalMiningTools.toolsTranslationKey+".mode.hint","按 %s 切换模式");
 
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD,"赤晶剑");
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD.getTranslationKey()+".mode.switch","切换到 %s 模式.");
@@ -65,8 +76,12 @@ public class LangZhCnDataGen extends FabricLanguageProvider {
         translationBuilder.add(ZeroCraftItems.BLOCK_TRANSPORTER.getTranslationKey()+".hint", "右键拾取方块，再次右键放下");
         translationBuilder.add(ZeroCraftItems.BLOCK_TRANSPORTER.getTranslationKey()+".hint.carrying", "正在拾取：[%s]");
 
+        translationBuilder.add(ZeroCraftEnchantments.VAMPIRE, "吸血");
+        translationBuilder.add(ZeroCraftEnchantments.BEHEADING, "斩首");
+
         translationBuilder.add(ZeroCraftItemGroups.ITEMS, "齐零工艺 | 物品");
         translationBuilder.add(ZeroCraftItemGroups.TOOLS,"齐零工艺 | 工具和武器");
+        translationBuilder.add(ZeroCraftItemGroups.MACHINES, "齐零工艺 | 机器和设备");
 
         translationBuilder.add(ZeroCraftKeyBinds.CATEGORY, "齐零工艺");
         translationBuilder.add(ZeroCraftKeyBinds.TOOL_MODE_SWITCH_KEY.getTranslationKey(),"工具模式切换");

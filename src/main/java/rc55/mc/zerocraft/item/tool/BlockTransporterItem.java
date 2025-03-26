@@ -205,7 +205,7 @@ public class BlockTransporterItem extends Item {
         return Registries.BLOCK.get(new Identifier(id));
     }
     //放置音效
-    protected SoundEvent getPlaceSound(BlockState state) {
+    private SoundEvent getPlaceSound(BlockState state) {
         return state.getSoundGroup().getPlaceSound();
     }
     //提供属性值

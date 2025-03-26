@@ -6,6 +6,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import rc55.mc.zerocraft.ZeroCraft;
+import rc55.mc.zerocraft.fluid.ZeroCraftFluids;
 import rc55.mc.zerocraft.item.armor.ScarletCrystalBootsItem;
 import rc55.mc.zerocraft.item.armor.ScarletCrystalChestplateItem;
 import rc55.mc.zerocraft.item.armor.ScarletCrystalHelmetItem;
@@ -17,6 +18,7 @@ public class ZeroCraftItems {
     //物品
     public static final Item SCARLET_CRYSTAL = register("scarlet_crystal", new ScarletCrystalItem());
     public static final Item SCARLET_CRYSTAL_INGOT = register("scarlet_crystal_ingot", new Item(new Item.Settings().fireproof().rarity(Rarity.RARE)));
+    public static final Item SCARLET_WATER_BUCKET = register("scarlet_water_bucket", new BucketItem(ZeroCraftFluids.SCARLET_WATER, new Item.Settings().maxCount(1).recipeRemainder(Items.BUCKET)));
     //工具
     public static final Item SCARLET_CRYSTAL_SWORD = register("scarlet_crystal_sword", new ScarletCrystalSwordItem());
     public static final Item SCARLET_CRYSTAL_PICKAXE = register("scarlet_crystal_pickaxe", new ScarletCrystalPickaxeItem());
@@ -33,7 +35,8 @@ public class ZeroCraftItems {
     //唱片
     public static final Item DISC_OST_RED_TIDE = register("music_disc_ost_red_tide", new MusicDiscItem(16, ZeroCraftSounds.DISC_OST_RED_TIDE, (new Item.Settings().rarity(Rarity.RARE).maxCount(1)), 116));
     public static final Item DISK_IMAGE_SEEK = register("music_disc_image_seek", new MusicDiscItem(17, ZeroCraftSounds.DISC_IMAGE_SEEK, new Item.Settings().rarity(Rarity.RARE).maxCount(1), 235));
-
+    //技术性
+    public static final Item DEBUG_WAND = register("debug_wand", new DebugWandItem());
     //注册用
     private static Item register(String id, Item item){
         return Registry.register(Registries.ITEM,new Identifier(ZeroCraft.MODID,id),item);

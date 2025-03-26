@@ -4,8 +4,11 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import rc55.mc.zerocraft.block.ZeroCraftBlocks;
 import rc55.mc.zerocraft.client.ZeroCraftKeyBinds;
+import rc55.mc.zerocraft.enchantment.ZeroCraftEnchantments;
 import rc55.mc.zerocraft.item.ZeroCraftItemGroups;
 import rc55.mc.zerocraft.item.ZeroCraftItems;
+import rc55.mc.zerocraft.item.tool.ScarletCrystalMiningTools;
+import rc55.mc.zerocraft.screen.FluidTankScreenHandler;
 
 public class LangEnDataGen extends FabricLanguageProvider {
     public LangEnDataGen(FabricDataOutput dataOutput) {
@@ -19,19 +22,27 @@ public class LangEnDataGen extends FabricLanguageProvider {
         translationBuilder.add(ZeroCraftBlocks.SCARLET_CRYSTAL_BLOCK,"Scarlet Crystal Block");
         translationBuilder.add(ZeroCraftBlocks.DEEPSLATE_SCARLET_CRYSTAL_ORE,"Deepslate Scarlet Crystal Ore");
         translationBuilder.add(ZeroCraftBlocks.SCARLET_CRYSTAL_ORE,"Scarlet Crystal Ore");
+        translationBuilder.add(ZeroCraftBlocks.SCARLET_WATER, "Scarlet Tide Polluted Water");
+
+        translationBuilder.add(ZeroCraftBlocks.FLUID_TANK, "Fluid Tank");
+        translationBuilder.add(FluidTankScreenHandler.TANK_TRANS_KEY, "Fluid Tank");
+        translationBuilder.add(FluidTankScreenHandler.TANK_EMPTY_TRANS_KEY, "(Empty)");
+        translationBuilder.add(FluidTankScreenHandler.TANK_CARRYING_TRANS_KEY, "Stored %s mB of %s");
 
         translationBuilder.add(ZeroCraftItems.DISC_OST_RED_TIDE,"Music Disc (OST)");
         translationBuilder.add(ZeroCraftItems.DISC_OST_RED_TIDE.getTranslationKey()+".desc","YoMio-Music - Red Tide");
         translationBuilder.add(ZeroCraftItems.DISK_IMAGE_SEEK,"Music Disc (Image Song)");
         translationBuilder.add(ZeroCraftItems.DISK_IMAGE_SEEK.getTranslationKey()+".desc","Luoshaoye - Seek (Not official translation, may change at any time)");
 
+        translationBuilder.add(ZeroCraftItems.SCARLET_WATER_BUCKET,"Scarlet Tide Polluted Water Bucket");
+
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_PICKAXE,"Scarlet Pickaxe");
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_AXE,"Scarlet Axe");
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SHOVEL,"Scarlet Shovel");
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_HOE,"Scarlet Hoe");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_mining_tools.mode.switch","Switched to %s mode.");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_mining_tools.mode.current","Currently %s mode");
-        translationBuilder.add("item.zerocraft.scarlet_crystal_mining_tools.mode.hint","Press %s to switch mode");
+        translationBuilder.add(ScarletCrystalMiningTools.toolsTranslationKey+".mode.switch","Switched to %s mode.");
+        translationBuilder.add(ScarletCrystalMiningTools.toolsTranslationKey+".mode.current","Currently %s mode");
+        translationBuilder.add(ScarletCrystalMiningTools.toolsTranslationKey+".mode.hint","Press %s to switch mode");
 
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD,"Scarlet Sword");
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_SWORD.getTranslationKey()+".mode.switch","Switched to %s mode.");
@@ -65,8 +76,12 @@ public class LangEnDataGen extends FabricLanguageProvider {
         translationBuilder.add(ZeroCraftItems.BLOCK_TRANSPORTER.getTranslationKey()+".hint", "Right click to pick up block, right click again to place down.");
         translationBuilder.add(ZeroCraftItems.BLOCK_TRANSPORTER.getTranslationKey()+".hint.carrying", "Currently carrying: [%s]");
 
+        translationBuilder.add(ZeroCraftEnchantments.VAMPIRE, "Vampire");
+        translationBuilder.add(ZeroCraftEnchantments.BEHEADING, "Beheading");
+
         translationBuilder.add(ZeroCraftItemGroups.ITEMS, "ZeroCraft - Items");
         translationBuilder.add(ZeroCraftItemGroups.TOOLS,"ZeroCraft - Tools & Weapons");
+        translationBuilder.add(ZeroCraftItemGroups.MACHINES, "ZeroCraft - Machines");
 
         translationBuilder.add(ZeroCraftKeyBinds.CATEGORY, "ZeroCraft");
         translationBuilder.add(ZeroCraftKeyBinds.TOOL_MODE_SWITCH_KEY.getTranslationKey(),"Tool mode switch key");

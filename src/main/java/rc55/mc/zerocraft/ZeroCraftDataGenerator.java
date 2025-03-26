@@ -15,6 +15,7 @@ public class ZeroCraftDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModelDataGen::new);//模型
 		pack.addProvider(BlockTagDataGen::new);//方块tag
 		pack.addProvider(ItemTagDataGen::new);//物品tag
+		pack.addProvider(FluidTagDataGen::new);//流体tag
 		pack.addProvider(BlockLootTableDataGen::new);//方块掉落
 		pack.addProvider(LangEnDataGen::new);//英文语言
 		pack.addProvider(LangZhCnDataGen::new);//中文

@@ -57,20 +57,20 @@ public class ScarletCrystalMiningTools {
     }
     //物品lore
     public static void appendTooltip(ItemStack stack, List<Text> tooltip) {
-        tooltip.add(Text.translatable(universalTranslationKey+".mode.hint", new Object[]{Text.translatable(ZeroCraftKeyBinds.TOOL_MODE_SWITCH_KEY.getBoundKeyTranslationKey())}).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable(toolsTranslationKey +".mode.hint", new Object[]{Text.translatable(ZeroCraftKeyBinds.TOOL_MODE_SWITCH_KEY.getBoundKeyTranslationKey())}).formatted(Formatting.GRAY));
 
         byte mode = stack.getOrCreateNbt().getByte("mode");
         switch (mode){
             case 1:
-                tooltip.add(Text.translatable(universalTranslationKey+".mode.current", new Object[]{Text.translatable(Enchantments.FORTUNE.getTranslationKey())}));
+                tooltip.add(Text.translatable(toolsTranslationKey +".mode.current", new Object[]{Text.translatable(Enchantments.FORTUNE.getTranslationKey())}));
                 break;
             case 2:
-                tooltip.add(Text.translatable(universalTranslationKey+".mode.current", new Object[]{Text.translatable(Enchantments.SILK_TOUCH.getTranslationKey())}));
+                tooltip.add(Text.translatable(toolsTranslationKey +".mode.current", new Object[]{Text.translatable(Enchantments.SILK_TOUCH.getTranslationKey())}));
                 break;
             case 0://没有模式
                 break;
             default://无效模式
-                tooltip.add(Text.translatable(universalTranslationKey+".mode.current", new Object[]{Text.translatable(universalTranslationKey+".mode.unknown")}));
+                tooltip.add(Text.translatable(toolsTranslationKey +".mode.current", new Object[]{Text.translatable(toolsTranslationKey +".mode.unknown")}));
         }
     }
     //每刻执行
@@ -88,7 +88,7 @@ public class ScarletCrystalMiningTools {
                         //是否在主手
                         if (serverStack.isOf(item)){
                             //模式切换
-                            sendMessage(serverPlayer, Text.translatable(universalTranslationKey+".mode.switch", new Object[]{Text.translatable(setMode(serverStack))}));
+                            sendMessage(serverPlayer, Text.translatable(toolsTranslationKey +".mode.switch", new Object[]{Text.translatable(setMode(serverStack))}));
                         }
                     }
                 });
@@ -108,6 +108,7 @@ public class ScarletCrystalMiningTools {
             //模式
             switch (mode){
                 case 1:
+                default:
                     tool.addEnchantment(Enchantments.FORTUNE, 3);
                     builder.add(LootContextParameters.TOOL, tool);
                     break;
@@ -116,14 +117,17 @@ public class ScarletCrystalMiningTools {
                     builder.add(LootContextParameters.TOOL, tool);
                     break;
             }
-            //掉落
-            for (ItemStack drop : state.getDroppedStacks(builder)){
-                miner.dropStack(drop);
+            //不掉落空手可挖掘的，防止复制
+            if (state.isToolRequired() && !state.hasBlockEntity()){
+                //掉落
+                for (ItemStack drop : state.getDroppedStacks(builder)){
+                    miner.dropStack(drop);
+                }
             }
         }
     }
     //通用翻译键
-    private static final String universalTranslationKey = "item.zerocraft.scarlet_crystal_mining_tools";
+    public static final String toolsTranslationKey = "item.zerocraft.scarlet_crystal_mining_tools";
     //发送消息
     //仅服务端
     private static void sendMessage(PlayerEntity player, Text message) {

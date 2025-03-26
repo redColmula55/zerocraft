@@ -3,6 +3,7 @@
   "values": [
     "zerocraft:scarlet_crystal_block",
     "zerocraft:scarlet_crystal_ore",
-    "zerocraft:deepslate_scarlet_crystal_ore"
+    "zerocraft:deepslate_scarlet_crystal_ore",
+    "zerocraft:fluid_tank"
   ]
 }

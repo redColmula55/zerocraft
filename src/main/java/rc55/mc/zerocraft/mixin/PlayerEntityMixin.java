@@ -20,7 +20,7 @@ public abstract class PlayerEntityMixin {
     @Inject(at = @At("HEAD"), method = "damageShield(F)V", cancellable = true)
     public void damageShield(float amount, CallbackInfo ci){
         PlayerEntity player = ((PlayerEntity)(Object)this);
-        ItemStack stack = player.activeItemStack;
+        ItemStack stack = player.getActiveItem();
         //是否可以格挡
         if (stack.isOf(Items.SHIELD) || stack.isIn(ItemTags.SWORDS)) {
             //格挡后放手
@@ -39,7 +39,7 @@ public abstract class PlayerEntityMixin {
                     } else {
                         player.equipStack(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
                     }
-                    stack = ItemStack.EMPTY;
+                    player.clearActiveItem();
                     //损坏音效
                     player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F, 0.8F + player.getWorld().random.nextFloat() * 0.4F);
                 }
