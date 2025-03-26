@@ -44,8 +44,9 @@ public class ScarletCrystalPickaxeItem extends PickaxeItem {
         return super.postMine(stack, world, state, pos, miner);
     }
     //防止重复掉落
+    //方块实体掉落遵循原版逻辑，防止nbt异常
     @Override
     public boolean isSuitableFor(BlockState state) {
-        return false;
+        return state.hasBlockEntity() && state.isToolRequired();
     }
 }

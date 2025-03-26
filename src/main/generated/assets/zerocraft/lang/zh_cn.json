@@ -1,7 +1,9 @@
 {
   "block.zerocraft.deepslate_scarlet_crystal_ore": "深板岩赤晶矿",
+  "block.zerocraft.fluid_tank": "流体储罐",
   "block.zerocraft.scarlet_crystal_block": "赤晶块",
   "block.zerocraft.scarlet_crystal_ore": "赤晶矿",
+  "container.zerocraft.fluid_tank": "流体储罐",
   "item.zerocraft.block_transporter": "方块搬运器",
   "item.zerocraft.block_transporter.damaged": "搬运器损坏！",
   "item.zerocraft.block_transporter.hint": "右键拾取方块，再次右键放下",
@@ -49,5 +51,6 @@
   "key.zerocraft.leggings_inventory": "护腿物品栏",
   "key.zerocraft.tool_mode_switch": "工具模式切换",
   "zerocraft.group.items": "齐零工艺 | 物品",
+  "zerocraft.group.machines": "齐零工艺 | 机器和设备",
   "zerocraft.group.tools": "齐零工艺 | 工具和武器"
 }

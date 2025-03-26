@@ -35,7 +35,8 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
                 .forceAddTag(BlockTags.TRAPDOORS).forceAddTag(BlockTags.DOORS).forceAddTag(BlockTags.FENCE_GATES);
 
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-                .add(ZeroCraftBlocks.SCARLET_CRYSTAL_BLOCK).add(ZeroCraftBlocks.SCARLET_CRYSTAL_ORE).add(ZeroCraftBlocks.DEEPSLATE_SCARLET_CRYSTAL_ORE);
+                .add(ZeroCraftBlocks.SCARLET_CRYSTAL_BLOCK).add(ZeroCraftBlocks.SCARLET_CRYSTAL_ORE).add(ZeroCraftBlocks.DEEPSLATE_SCARLET_CRYSTAL_ORE)
+                .add(ZeroCraftBlocks.FLUID_TANK);
         getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ZeroCraftBlocks.SCARLET_CRYSTAL_BLOCK).add(ZeroCraftBlocks.SCARLET_CRYSTAL_ORE).add(ZeroCraftBlocks.DEEPSLATE_SCARLET_CRYSTAL_ORE);
     }

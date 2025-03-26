@@ -20,6 +20,7 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ZeroCraftBlocks.SCARLET_CRYSTAL_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ZeroCraftBlocks.SCARLET_CRYSTAL_ORE);
         blockStateModelGenerator.registerSimpleCubeAll(ZeroCraftBlocks.DEEPSLATE_SCARLET_CRYSTAL_ORE);
+        blockStateModelGenerator.registerSimpleCubeAll(ZeroCraftBlocks.FLUID_TANK);
     }
 
     @Override

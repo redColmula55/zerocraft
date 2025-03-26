@@ -1,7 +1,9 @@
 {
   "block.zerocraft.deepslate_scarlet_crystal_ore": "Deepslate Scarlet Crystal Ore",
+  "block.zerocraft.fluid_tank": "Fluid Tank",
   "block.zerocraft.scarlet_crystal_block": "Scarlet Crystal Block",
   "block.zerocraft.scarlet_crystal_ore": "Scarlet Crystal Ore",
+  "container.zerocraft.fluid_tank": "流体储罐",
   "item.zerocraft.block_transporter": "Block Transporter",
   "item.zerocraft.block_transporter.damaged": "Transporter damaged!",
   "item.zerocraft.block_transporter.hint": "Right click to pick up block, right click again to place down.",
@@ -49,5 +51,6 @@
   "key.zerocraft.leggings_inventory": "Leggings inventory",
   "key.zerocraft.tool_mode_switch": "Tool mode switch key",
   "zerocraft.group.items": "ZeroCraft - Items",
+  "zerocraft.group.machines": "ZeroCraft - Machines",
   "zerocraft.group.tools": "ZeroCraft - Tools & Weapons"
 }

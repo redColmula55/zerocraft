@@ -17,7 +17,9 @@ public class ZeroCraftBlocks {
     //矿石
     public static final Block SCARLET_CRYSTAL_ORE = register("scarlet_crystal_ore", new Block(AbstractBlock.Settings.copy(Blocks.STONE)));
     public static final Block DEEPSLATE_SCARLET_CRYSTAL_ORE = register("deepslate_scarlet_crystal_ore", new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE)));
-
+    //科技线
+    //储罐
+    public static final Block FLUID_TANK = register("fluid_tank", new FluidTankBlock(AbstractBlock.Settings.create().solid().hardness(1.0f).requiresTool()));
     //注册用
     private static Block register(String id, Block block){
         Registry.register(Registries.ITEM, new Identifier(ZeroCraft.MODID, id), new BlockItem(block, new Item.Settings()));
