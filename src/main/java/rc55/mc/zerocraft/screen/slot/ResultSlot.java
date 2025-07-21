@@ -6,11 +6,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
 
 public class ResultSlot extends Slot {
-    private final Runnable onTake;
+    private final OnTakeItem onTake;
     public ResultSlot(Inventory inventory, int index, int x, int y) {
-        this(inventory, index, x, y, () -> {});
+        this(inventory, index, x, y, (player, stack) -> {});
     }
-    public ResultSlot(Inventory inventory, int index, int x, int y, Runnable onTake) {
+    public ResultSlot(Inventory inventory, int index, int x, int y, OnTakeItem onTake) {
         super(inventory, index, x, y);
         this.onTake = onTake;
     }
@@ -20,6 +20,11 @@ public class ResultSlot extends Slot {
     }
     @Override
     public void onTakeItem(PlayerEntity player, ItemStack stack) {
-        onTake.run();
+        onTake.execute(player, stack);
+    }
+
+    @FunctionalInterface
+    public interface OnTakeItem {
+        void execute(PlayerEntity player, ItemStack stack);
     }
 }

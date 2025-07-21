@@ -10,6 +10,14 @@ Notice: This mod is a community project and is only for fun. This mod has no ass
 If you find any bug, please report it in the issues page. Please describe how the bug was triggered and what it affects so that we can patch it as fast as possible. We accept Chinese / English issues.
 <hr>
 
+已知问题  Known issues：
+
+* 赤潮污染水会在装有特定版本的钠时错误的渲染为蓝色<br>
+Scarlet tide polluted water will be incorrectly rendered as blue while certain version of Sodium is installed.<br>
+解决办法：更新钠及其附属模组至最新版本<br>
+Solution: Update Sodium and its child mods to the latest version.
+<hr>
+
 * 适用MC版本：1.20.1 <br>
 Minecraft version: 1.20.1 <br>
 * Fabric版本：0.16.10或以上 <br>
@@ -20,4 +28,3 @@ Needs Fabric API
 
 本项目受 GPL-3.0 及 CC-BY-NC-SA 4.0 协议保护<br>
 This project is licensed under GPL-3.0 & CC-BY-NC-SA-4.0.<br>
-&copy; 2025 redColmula55

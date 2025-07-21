@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_scarlet_crystal_block": {
+    "has_scarlet_crystal": {
       "conditions": {
         "items": [
           {
             "items": [
-              "zerocraft:scarlet_crystal_block"
+              "zerocraft:scarlet_crystal"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:scarlet_crystal_ingot"
+        "recipe": "zerocraft:scarlet_crystal_ingot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_scarlet_crystal_block",
+      "has_scarlet_crystal",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:scarlet_crystal_ingot"
+      "zerocraft:scarlet_crystal_ingot"
     ]
   },
   "sends_telemetry_event": false

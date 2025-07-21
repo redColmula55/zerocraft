@@ -1,7 +1,8 @@
 {
   "replace": false,
   "values": [
+    "zerocraft:wrench",
     "zerocraft:block_transporter",
-    "zerocraft:wrench"
+    "zerocraft:ore_finder"
   ]
 }

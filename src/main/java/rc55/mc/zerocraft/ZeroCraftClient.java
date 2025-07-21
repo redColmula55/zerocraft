@@ -7,6 +7,7 @@ import rc55.mc.zerocraft.client.ZeroCraftHandledScreens;
 import rc55.mc.zerocraft.client.ZeroCraftKeyBinds;
 import rc55.mc.zerocraft.client.ZeroCraftRenderers;
 import rc55.mc.zerocraft.client.model.ZeroCraftModelPredicateProvider;
+import rc55.mc.zerocraft.item.ZeroCraftItems;
 
 @Environment(EnvType.CLIENT)
 public class ZeroCraftClient implements ClientModInitializer {
@@ -18,6 +19,7 @@ public class ZeroCraftClient implements ClientModInitializer {
         ZeroCraftRenderers.addRenderer();//渲染
         ZeroCraftModelPredicateProvider.addModelPredicate();//模型谓词-物品材质用
         ZeroCraftHandledScreens.addScreens();//客户端侧屏幕
+        ZeroCraftItems.regItemTooltip();//原版物品lore
         ZeroCraft.LOGGER.info("ZeroCraft client side loaded.");
     }
 }

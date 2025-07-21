@@ -4,6 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.screen.ArrayPropertyDelegate;
@@ -11,8 +12,10 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import org.jetbrains.annotations.NotNull;
+import rc55.mc.zerocraft.api.Utils;
 import rc55.mc.zerocraft.block.entity.FluidTankBlockEntity;
-import rc55.mc.zerocraft.screen.slot.FluidTankInputSlot;
+import rc55.mc.zerocraft.block.entity.ZeroCraftBlockEntityType;
+import rc55.mc.zerocraft.screen.slot.InputSlot;
 import rc55.mc.zerocraft.screen.slot.ResultSlot;
 
 public class FluidTankScreenHandler extends ScreenHandler {
@@ -23,7 +26,7 @@ public class FluidTankScreenHandler extends ScreenHandler {
     private static final int HOTBAR_START = 0;
     private static final int HOTBAR_END = 8;
 
-    public static final String TANK_TRANS_KEY = "container.zerocraft.fluid_tank";
+    public static final String TANK_TRANS_KEY = Utils.getContainerTransKey(ZeroCraftBlockEntityType.FLUID_TANK);
     public static final String TANK_EMPTY_TRANS_KEY = TANK_TRANS_KEY+".empty";
     public static final String TANK_CARRYING_TRANS_KEY = TANK_TRANS_KEY+".carrying";
 
@@ -102,19 +105,20 @@ public class FluidTankScreenHandler extends ScreenHandler {
 
     //玩家物品栏
     private void addPlayerInventorySlots(PlayerInventory playerInventory) {
+        //快捷栏
+        for (int i = 0; i < 9; i++) {
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+        }
+        //物品栏
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
                 this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
-        //快捷栏
-        for (int i = 0; i < 9; i++) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
-        }
     }
     //放水用
     private void addInputSlot(){
-        this.addSlot(new FluidTankInputSlot(this.inventory, 0, 15, 20));
+        this.addSlot(new InputSlot(this.inventory, 0, 15, 20, (stack -> stack.getItem() instanceof BucketItem)));
     }
     private void addOutputSlot(){
         this.addSlot(new ResultSlot(this.inventory, 1, 15, 50));

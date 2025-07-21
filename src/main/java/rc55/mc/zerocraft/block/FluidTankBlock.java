@@ -18,6 +18,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -33,12 +36,18 @@ import rc55.mc.zerocraft.block.entity.ZeroCraftBlockEntityType;
 import rc55.mc.zerocraft.screen.FluidTankScreenHandler;
 
 import java.util.List;
-import java.util.Objects;
 
 public class FluidTankBlock extends BlockWithEntity {
-    protected FluidTankBlock(Settings settings) {
+
+    private final int capacity;
+    private final int maxTemperature;
+
+    protected FluidTankBlock(int capacity, int maxTemperature, Settings settings) {
         super(settings);
+        this.capacity = capacity;
+        this.maxTemperature = maxTemperature;
     }
+
     //渲染
     @Override
     public BlockRenderType getRenderType(BlockState state){
@@ -47,70 +56,26 @@ public class FluidTankBlock extends BlockWithEntity {
     //方块实体
     @Override
     public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new FluidTankBlockEntity(pos, state);
+        return new FluidTankBlockEntity(pos, state, this.capacity, this.maxTemperature);
     }
     //右键效果
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit){
-        if (!world.isClient){
-            ItemStack stack = player.getStackInHand(hand);
-            if (stack.getItem() instanceof BucketItem){//是否手持水桶
-                BlockEntity blockEntity = Objects.requireNonNull(world.getBlockEntity(pos));
-                if (blockEntity instanceof FluidTankBlockEntity fluidTankBlockEntity){
-                    NbtCompound nbt = fluidTankBlockEntity.createNbt();
-                    String storedFluidId = nbt.getString("fluid");
-                    int storedFluidAmount = nbt.getInt("amount");
-                    for (Fluid fluid : Registries.FLUID){
-                        if (fluid.isStill(fluid.getDefaultState()) || fluid.getDefaultState().isEmpty()){//仅静止，避免重复
-                            if (!fluid.matchesType(Fluids.EMPTY)){//倒入
-                                if (stack.isOf(fluid.getBucketItem())){
-                                    String id = String.valueOf(Registries.FLUID.getId(fluid));
-                                    if (Objects.equals(id, storedFluidId) || storedFluidAmount == 0){
-                                        if (storedFluidAmount <= 15000){
-                                            stack.decrement(1);
-                                            player.dropItem(Items.BUCKET);
-                                            storedFluidAmount+=1000;
-                                            nbt.putString("fluid", id);
-                                            nbt.putInt("amount", storedFluidAmount);
-                                            fluidTankBlockEntity.readNbt(nbt);
-                                            fluidTankBlockEntity.markDirty();
-                                        } else {//满了
-                                            player.openHandledScreen(createScreenHandlerFactory(state, world, pos));
-                                            return ActionResult.CONSUME;
-                                        }
-                                    } else {//已有其他液体
-                                        player.openHandledScreen(createScreenHandlerFactory(state, world, pos));
-                                        return ActionResult.CONSUME;
-                                    }
-                                }
-                            } else {//取出
-                                if (stack.isOf(Items.BUCKET)){
-                                    if (storedFluidAmount >= 1000){
-                                        stack.decrement(1);
-                                        Fluid storedFluidType = Registries.FLUID.get(new Identifier(storedFluidId));
-                                        player.dropItem(storedFluidType.getBucketItem());
-                                        storedFluidAmount-=1000;
-                                        if (storedFluidAmount == 0){
-                                            storedFluidId = "";
-                                        }
-                                        nbt.putString("fluid", storedFluidId);
-                                        nbt.putInt("amount", storedFluidAmount);
-                                        fluidTankBlockEntity.readNbt(nbt);
-                                        fluidTankBlockEntity.markDirty();
-                                    } else {//没有了
-                                        player.openHandledScreen(createScreenHandlerFactory(state, world, pos));
-                                        return ActionResult.CONSUME;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                } else {//数据错误
-                    return ActionResult.FAIL;
+        ItemStack stack = player.getStackInHand(hand);
+        FluidTankBlockEntity tank = world.getBlockEntity(pos) != null ? (FluidTankBlockEntity) world.getBlockEntity(pos) : null;
+        if (tank != null) {
+            if (stack.isOf(Items.BUCKET)){//取出
+                if (!this.onExtract(world, tank, player, stack)) {//未成功则打开gui
+                    player.openHandledScreen(createScreenHandlerFactory(state, world, pos));
+                }
+            } else if (stack.getItem() instanceof BucketItem) {//放入
+                if (!this.onInsert(world, tank, player, stack)) {
+                    player.openHandledScreen(createScreenHandlerFactory(state, world, pos));
                 }
             } else {//打开gui
                 player.openHandledScreen(createScreenHandlerFactory(state, world, pos));
             }
+            tank.markDirty();
         }
         return ActionResult.SUCCESS;
     }
@@ -118,7 +83,7 @@ public class FluidTankBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ZeroCraftBlockEntityType.FLUID_TANK, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
+        return checkType(type, ZeroCraftBlockEntityType.FLUID_TANK, FluidTankBlockEntity::tick);
     }
     //被破坏时
     @Override
@@ -136,11 +101,12 @@ public class FluidTankBlock extends BlockWithEntity {
     //放置效果
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        if (itemStack.hasCustomName()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof FluidTankBlockEntity) {
-                ((FluidTankBlockEntity)blockEntity).setCustomName(itemStack.getName());
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof FluidTankBlockEntity fluidTankBlockEntity) {
+            if (itemStack.hasCustomName()) {
+                fluidTankBlockEntity.setCustomName(itemStack.getName());
             }
+            //FluidTankBlockEntity.setTankProperty(fluidTankBlockEntity, this.capacity, this.maxTemperature);
         }
     }
     //物品lore
@@ -148,13 +114,71 @@ public class FluidTankBlock extends BlockWithEntity {
     public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
         NbtCompound nbt = BlockItem.getBlockEntityNbt(stack);
-        if (nbt != null) {
-            String id = nbt.getString("fluid");
-            if (id.isEmpty()) {
-                tooltip.add(Text.translatable(FluidTankScreenHandler.TANK_EMPTY_TRANS_KEY));
-            } else {
-                tooltip.add(Text.translatable(FluidTankScreenHandler.TANK_CARRYING_TRANS_KEY, new Object[]{nbt.getInt("amount"), Text.translatable("block." + new Identifier(id).toTranslationKey())}));
+        if (nbt == null || nbt.getCompound("Fluid").isEmpty()) {
+            tooltip.add(Text.translatable(FluidTankScreenHandler.TANK_EMPTY_TRANS_KEY));
+        } else {
+            NbtCompound nbt2 = nbt.getCompound("Fluid");
+            String id = nbt2.getString("id");
+            tooltip.add(Text.translatable(FluidTankScreenHandler.TANK_CARRYING_TRANS_KEY, new Object[]{nbt2.getInt("amount"), Text.translatable("block." + new Identifier(id).toTranslationKey())}));
+        }
+    }
+
+    /**
+     * 放入流体
+     * @param world 世界实例
+     * @param blockEntity 方块实体实例
+     * @param player 交互的玩家实例
+     * @param stack 手持物品
+     * @return 是否成功放入
+     */
+    private boolean onInsert(World world, FluidTankBlockEntity blockEntity, PlayerEntity player, ItemStack stack) {
+        int storedFluidRawId = FluidTankBlockEntity.getStoredFluidRawId(blockEntity);
+        Fluid storedFluid = storedFluidRawId == -1 ? Fluids.EMPTY : Registries.FLUID.get(storedFluidRawId);
+        int storedFluidAmount = FluidTankBlockEntity.getStoredFluidAmount(blockEntity);
+        for (Fluid fluid : Registries.FLUID) {
+            if (fluid.isStill(fluid.getDefaultState())) {
+                String id = Registries.FLUID.getId(fluid).toString();
+                if ((fluid.matchesType(storedFluid) || storedFluid.matchesType(Fluids.EMPTY)) && stack.isOf(fluid.getBucketItem()) && storedFluidAmount+1000 <= this.capacity && fluid.getTemperature() <= this.maxTemperature) {
+                    FluidTankBlockEntity.setStoredFluid(blockEntity, id, storedFluidAmount+1000);
+                    if (!player.isCreative()) {
+                        stack.decrement(1);
+                        player.dropItem(Items.BUCKET);
+                    }
+                    world.playSound(player, blockEntity.getPos(), fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_EMPTY_LAVA : SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS);
+                    blockEntity.markDirty();
+                    return true;
+                }
             }
         }
+        return false;
+    }
+    /**
+     * 取出流体
+     * @param world 世界实例
+     * @param blockEntity 方块实体实例
+     * @param player 交互的玩家实例
+     * @param stack 手持物品
+     * @return 是否成功取出
+     */
+    private boolean onExtract(World world, FluidTankBlockEntity blockEntity, PlayerEntity player, ItemStack stack) {
+        int storedFluidRawId = FluidTankBlockEntity.getStoredFluidRawId(blockEntity);
+        Fluid storedFluid = Registries.FLUID.get(storedFluidRawId);
+        int storedFluidAmount = FluidTankBlockEntity.getStoredFluidAmount(blockEntity);
+        if (!storedFluid.matchesType(Fluids.EMPTY) && storedFluidAmount-1000 >= 0) {
+            String id = Registries.FLUID.getId(storedFluid).toString();
+            if (storedFluidAmount-1000 <= 0) {//没了就重新设置为空
+                FluidTankBlockEntity.setStoredFluid(blockEntity, "", 0);
+            } else {//正常减少
+                FluidTankBlockEntity.setStoredFluid(blockEntity, id, storedFluidAmount-1000);
+            }
+            if (!player.isCreative()) {//创造不减少不返还
+                stack.decrement(1);
+                player.dropItem(storedFluid.getBucketItem());
+            }
+            world.playSound(player, blockEntity.getPos(), storedFluid.getBucketFillSound().orElse(SoundEvents.ITEM_BUCKET_FILL), SoundCategory.BLOCKS);
+            blockEntity.markDirty();
+            return true;
+        }
+        return false;
     }
 }

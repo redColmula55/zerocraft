@@ -2,8 +2,8 @@
 	"schemaVersion": 1,
 	"id": "zerocraft",
 	"version": "${version}",
-	"name": "ZeroCraft - 齐零工艺",
-	"description": "ZeroCraft - 齐零工艺 \n 齐零科技 荣誉出品 Powered by Zero-Alignment \n （开玩笑的，本mod和赤潮官方没有关系，仅为粉丝二创，任何内容均不代表官方立场 \n 齐零工艺是一个以赤潮ZeroERA为背景制作的mod，引入了诸多赤潮ZeroERA的特性以及一些小工具。",
+	"name": "ZeroCraft",
+	"description": "Powered by Zero-Alignment \n Notice: This mod is just a fan art and dose not have any association to ZeroERA official. \n ZeroCraft is a mod which implements various features from ZeroERA and a few gadgets into Minecraft.",
 	"authors": [
 		"redColmula55"
 	],
@@ -27,7 +27,7 @@
 		]
 	},
 	"mixins": [
-		"zeroera.mixins.json"
+		"zerocraft.mixins.json"
 	],
 	"accessWidener": "zerocraft.accesswidener",
 	"depends": {
@@ -35,6 +35,11 @@
 		"minecraft": "~1.20.1",
 		"java": ">=17",
 		"fabric-api": "*"
+	},
+	"custom": {
+		"loom:injected_interfaces": {
+			"net/minecraft/class_3611": ["rc55/mc/zerocraft/fluid/FluidTemperature"]
+		}
 	},
 	"suggests": {
 		"another-mod": "*"

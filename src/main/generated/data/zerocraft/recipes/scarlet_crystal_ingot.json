@@ -3,11 +3,34 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "zerocraft:scarlet_crystal_block"
+      "item": "zerocraft:scarlet_crystal"
+    },
+    {
+      "item": "zerocraft:scarlet_crystal"
+    },
+    {
+      "item": "zerocraft:scarlet_crystal"
+    },
+    {
+      "item": "zerocraft:scarlet_crystal"
+    },
+    {
+      "item": "zerocraft:scarlet_crystal"
+    },
+    {
+      "item": "zerocraft:scarlet_crystal"
+    },
+    {
+      "item": "zerocraft:scarlet_crystal"
+    },
+    {
+      "item": "zerocraft:scarlet_crystal"
+    },
+    {
+      "item": "zerocraft:scarlet_crystal"
     }
   ],
   "result": {
-    "count": 9,
     "item": "zerocraft:scarlet_crystal_ingot"
   }
 }

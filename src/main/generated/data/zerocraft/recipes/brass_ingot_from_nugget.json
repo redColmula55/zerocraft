@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "brass_ingot",
+  "key": {
+    "#": {
+      "item": "zerocraft:brass_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "zerocraft:brass_ingot"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:zinc_ingot_from_blasting_zinc_dust"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_zinc_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "zerocraft:zinc_dust"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_zinc_dust",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:zinc_ingot_from_blasting_zinc_dust"
+    ]
+  },
+  "sends_telemetry_event": false
+}

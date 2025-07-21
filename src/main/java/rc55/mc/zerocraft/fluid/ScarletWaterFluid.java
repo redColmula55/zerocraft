@@ -13,8 +13,12 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import rc55.mc.zerocraft.api.Utils;
 import rc55.mc.zerocraft.block.ZeroCraftBlocks;
+import rc55.mc.zerocraft.world.ZeroCraftGameRules;
 import rc55.mc.zerocraft.item.ZeroCraftItems;
+
+import java.util.Objects;
 
 public abstract class ScarletWaterFluid extends WaterFluid {
     //流动
@@ -50,18 +54,28 @@ public abstract class ScarletWaterFluid extends WaterFluid {
     //可替换其他流体
     @Override
     public boolean canBeReplacedWith(FluidState state, BlockView world, BlockPos pos, Fluid fluid, Direction direction) {
-        return direction == Direction.DOWN && !fluid.isIn(FluidTags.WATER);
+        return direction == Direction.DOWN && fluid.isIn(FluidTags.LAVA);
     }
     //流动
     @Override
     protected void flow(WorldAccess world, BlockPos pos, BlockState state, Direction direction, FluidState fluidState) {
-        if (direction == Direction.DOWN) {
+        if (this.isIn(ZeroCraftFluidTags.SCARLET_WATER) && direction == Direction.DOWN) {
             FluidState newFluidState = world.getFluidState(pos);
-            if (this.isIn(ZeroCraftFluidTags.SCARLET_WATER) && newFluidState.isIn(FluidTags.WATER)) {
-                if (state.getBlock() instanceof FluidBlock) {
-                    world.setBlockState(pos, ZeroCraftFluids.SCARLET_WATER.getDefaultState().getBlockState(), Block.NOTIFY_ALL);
+            if (world.getServer() != null) {
+                int rate = world.getServer().getGameRules().getInt(ZeroCraftGameRules.SCARLET_WATER_INFEST_CHANCE);
+                //感染
+                if (newFluidState.isIn(ZeroCraftFluidTags.SCARLET_WATER_POLLUTIABLE) && rate != 0) {
+                    if (state.getBlock() instanceof FluidBlock) {
+                        if (Utils.getRandomPercent(world.getRandom(), rate)) {
+                            if (newFluidState.isStill()) {//静止
+                                world.setBlockState(pos, ZeroCraftFluids.SCARLET_WATER.getDefaultState().getBlockState(), Block.NOTIFY_ALL);
+                            } else {//流动
+                                world.setBlockState(pos, ZeroCraftFluids.SCARLET_WATER.getDefaultState().getBlockState().with(FluidBlock.LEVEL, getBlockStateLevel(newFluidState)), Block.NOTIFY_ALL);
+                            }
+                            return;
+                        }
+                    }
                 }
-                return;
             }
         }
         super.flow(world, pos, state, direction, fluidState);

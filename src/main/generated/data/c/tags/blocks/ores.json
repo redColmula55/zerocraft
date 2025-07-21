@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#zerocraft:scarlet_crystal_ores",
+    "#c:ores/tin",
+    "#c:ores/zinc"
+  ]
+}

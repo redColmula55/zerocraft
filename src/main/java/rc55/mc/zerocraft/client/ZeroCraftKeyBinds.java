@@ -40,7 +40,6 @@ public class ZeroCraftKeyBinds {
                 PlayerEntity player = minecraftClient.player;
                 if (player != null) {
                     //发包
-                    //进行判断，减少负担
                     if (player.isHolding(ZeroCraftItems.SCARLET_CRYSTAL_PICKAXE)){
                         ClientPlayNetworking.send(ScarletCrystalPickaxeItem.PACK_ID, PacketByteBufs.create());//稿
                     } else if (player.isHolding(ZeroCraftItems.SCARLET_CRYSTAL_SWORD)) {
@@ -49,20 +48,18 @@ public class ZeroCraftKeyBinds {
                         ClientPlayNetworking.send(ScarletCrystalAxeItem.PACK_ID, PacketByteBufs.create());//斧
                     } else if (player.isHolding(ZeroCraftItems.SCARLET_CRYSTAL_SHOVEL)) {
                         ClientPlayNetworking.send(ScarletCrystalShovelItem.PACK_ID, PacketByteBufs.create());//铲子
-                    } else {
+                    } else if (player.isHolding(ZeroCraftItems.SCARLET_CRYSTAL_HOE)) {
                         ClientPlayNetworking.send(ScarletCrystalHoeItem.PACK_ID, PacketByteBufs.create());//锄头
-                        //minecraftClient.player.sendMessage(Text.of("[debug/client] Not holding anything, ignoring."));//调试信息
                     }
-                    //minecraftClient.player.sendMessage(Text.of("[debug/client] Package sent from client."));//调试信息
                 }
             }
         });
 
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
             while (ZeroCraftKeyBinds.HELMET_MODE_SWITCH_KEY.wasPressed()){
-                //发包
-                ClientPlayNetworking.send(ScarletCrystalHelmetItem.PACK_ID, PacketByteBufs.create());//头盔
-                //minecraftClient.player.sendMessage(Text.of("[debug/client] Pack helmet sent from client."));//调试信息
+                if (minecraftClient.player != null && minecraftClient.player.getInventory().getArmorStack(3).isOf(ZeroCraftItems.SCARLET_CRYSTAL_HELMET)) {
+                    ClientPlayNetworking.send(ScarletCrystalHelmetItem.PACK_ID, PacketByteBufs.create());//头盔
+                }
             }
         });
 

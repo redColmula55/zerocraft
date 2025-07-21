@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "zerocraft:scarlet_crystal_ingot",
+    "#c:ingots/tin",
+    "#c:ingots/zinc",
+    "#c:ingots/bronze",
+    "#c:ingots/brass"
+  ]
+}

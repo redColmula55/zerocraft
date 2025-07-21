@@ -7,7 +7,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryChangedListener;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
@@ -27,13 +26,28 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import rc55.mc.zerocraft.api.fluid.FluidTransportHelper;
+import rc55.mc.zerocraft.api.fluid.SingleTypeTank;
+import rc55.mc.zerocraft.api.fluid.Tank;
+import rc55.mc.zerocraft.api.inventory.InventoryImpl;
 import rc55.mc.zerocraft.screen.FluidTankScreenHandler;
 
 import java.util.List;
 
-public class FluidTankBlockEntity extends BlockEntity implements Inventory, NamedScreenHandlerFactory, Nameable {
+public class FluidTankBlockEntity extends BlockEntity implements InventoryImpl, NamedScreenHandlerFactory, Nameable, FluidTransportHelper {
+
+    private int maxTemperature;
+    private int capacity;
+    private SingleTypeTank tank;
+
     public FluidTankBlockEntity(BlockPos pos, BlockState state) {
         super(ZeroCraftBlockEntityType.FLUID_TANK, pos, state);
+    }
+    public FluidTankBlockEntity(BlockPos pos, BlockState state, int capacity, int maxTemperature) {
+        this(pos, state);
+        this.capacity = capacity;
+        this.maxTemperature = maxTemperature;
+        this.tank = new SingleTypeTank(capacity, maxTemperature);
     }
     //
     private final ViewerCountManager stateManager = new ViewerCountManager() {
@@ -66,16 +80,15 @@ public class FluidTankBlockEntity extends BlockEntity implements Inventory, Name
     private int carriedFluidRawId = 0;
     private int carriedFluidAmount = 0;
 
-    private final int INPUT_SLOT_ID = 0;
-    private final int OUTPUT_SLOT_ID = 1;
-    private final int MAX_AMOUNT = 16000;//最大存储，单位mb
+    public static final int INPUT_SLOT_ID = 0;
+    public static final int OUTPUT_SLOT_ID = 1;
     //同步储存的信息
     private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
         @Override
         public int get(int index) {
             return switch (index) {
-                case 0 -> FluidTankBlockEntity.this.carriedFluidRawId;//数字id
-                case 1 -> FluidTankBlockEntity.this.carriedFluidAmount;//数量
+                case 0 -> getStoredFluidRawId(FluidTankBlockEntity.this);//数字id
+                case 1 -> getStoredFluidAmount(FluidTankBlockEntity.this);//数量
                 default -> -1;
             };
         }
@@ -93,17 +106,16 @@ public class FluidTankBlockEntity extends BlockEntity implements Inventory, Name
     };
 
     //每刻执行
-    public void tick(World world, BlockPos pos, BlockState state){
-        if (!world.isClient){
-            if (!this.getStack(INPUT_SLOT_ID).isEmpty()){
-                if (this.onInsertItem(this.getStack(INPUT_SLOT_ID))){
+    public static void tick(World world, BlockPos pos, BlockState state, FluidTankBlockEntity blockEntity){
+        if (!world.isClient) {
+            if (!blockEntity.getStack(INPUT_SLOT_ID).isEmpty()) {
+                if (blockEntity.onInsertItem(blockEntity.getStack(INPUT_SLOT_ID))) {
                     markDirty(world, pos, state);
                 }
             }
-            this.carriedFluidRawId = getStoredFluidRawId(this);
         }
     }
-
+    //设置数据
     @Override
     public void readNbt(NbtCompound nbt){
         super.readNbt(nbt);
@@ -111,75 +123,25 @@ public class FluidTankBlockEntity extends BlockEntity implements Inventory, Name
         if (nbt.contains("CustomName", NbtElement.STRING_TYPE)) {
             this.customName = Text.Serializer.fromJson(nbt.getString("CustomName"));
         }
-        this.carriedFluidName = nbt.getString("fluid");
-        this.carriedFluidAmount = nbt.getInt("amount");
+        this.tank = SingleTypeTank.fromNbt(nbt);
     }
-
+    //保存世界
     @Override
     public void writeNbt(NbtCompound nbt){
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, this.inventory);
-        nbt.putString("fluid", this.carriedFluidName);
-        nbt.putInt("amount", this.carriedFluidAmount);
         if (this.customName != null) {
             nbt.putString("CustomName", Text.Serializer.toJson(this.customName));
         }
+        this.tank.writeNbt(nbt);
     }
 
     //物品栏
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
     @Nullable private List<InventoryChangedListener> listeners;
-    //大小
     @Override
-    public int size() { return 2; }
-    //是否可以使用
-    @Override
-    public boolean canPlayerUse(PlayerEntity player) { return true; }
-    //
-    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
-        return stack.getItem() instanceof BucketItem && slot == 0;
-    }
-    //是否为空
-    @Override
-    public boolean isEmpty() {
-        return this.inventory.isEmpty();
-    }
-    //获取物品
-    @Override
-    public ItemStack getStack(int slot) {
-        return this.inventory.get(slot);
-    }
-    //减少物品
-    @Override
-    public ItemStack removeStack(int slot, int amount) {
-        //this.markDirty();
-        ItemStack result = Inventories.splitStack(this.inventory, slot, amount);
-        if (!result.isEmpty()) {
-            this.markDirty();
-        }
-        return result;
-    }
-    //移除物品
-    @Override
-    public ItemStack removeStack(int slot) {
-        this.markDirty();
-        return Inventories.removeStack(this.inventory, slot);
-        //return ItemStack.EMPTY;
-    }
-    //设置物品
-    @Override
-    public void setStack(int slot, ItemStack stack) {
-        this.markDirty();
-        this.inventory.set(slot, stack);
-        if (!stack.isEmpty() && stack.getCount() > stack.getMaxCount()) {
-            stack.setCount(stack.getMaxCount());
-        }
-    }
-    //清空
-    @Override
-    public void clear() {
-        this.markDirty();
-        this.inventory.clear();
+    public DefaultedList<ItemStack> getStacksList() {
+        return this.inventory;
     }
     //进行更改时执行
     @Override
@@ -194,7 +156,7 @@ public class FluidTankBlockEntity extends BlockEntity implements Inventory, Name
     //容器名字
     @Override
     public Text getName() {
-        return Text.translatable("container.zerocraft.fluid_tank");
+        return Text.translatable(FluidTankScreenHandler.TANK_TRANS_KEY);
     }
     //是否显示自定义名字
     @Override
@@ -212,23 +174,32 @@ public class FluidTankBlockEntity extends BlockEntity implements Inventory, Name
     }
     //获取数据
     public static String getStoredFluidName(FluidTankBlockEntity blockEntity) {
-        NbtCompound nbt = blockEntity.createNbt();
-        return nbt.getString("fluid");
+        return blockEntity.tank.getCarriedFluid(0).getFluidId();
     }
     public static int getStoredFluidAmount(FluidTankBlockEntity blockEntity) {
-        NbtCompound nbt = blockEntity.createNbt();
-        return nbt.getInt("amount");
+        return blockEntity.tank.getUsedCapacity();
     }
     public static int getStoredFluidRawId(FluidTankBlockEntity blockEntity) {
-        String id = getStoredFluidName(blockEntity);
-        return id.isEmpty() ? -1 : Registries.FLUID.getRawId(Registries.FLUID.get(new Identifier(id)));//数字id,空罐返回-1
+        return blockEntity.tank.getCarriedFluid(0).getFluidRawId();//数字id,空罐返回-1
+    }
+    public static int getCapacity(FluidTankBlockEntity blockEntity) {
+        return blockEntity.tank.getCapacity();
+    }
+    public static int getMaxTemperature(FluidTankBlockEntity blockEntity) {
+        return blockEntity.tank.getMaxTemperature();
     }
     //设置nbt
     public static void setStoredFluid(FluidTankBlockEntity blockEntity, String id, int amount){
         NbtCompound nbt = blockEntity.createNbt();
-        nbt.putString("fluid", id);
-        nbt.putInt("amount", amount);
+        NbtCompound nbt2 = new NbtCompound();
+        nbt2.putString("id", id);
+        nbt2.putInt("amount", amount);
+        nbt.put("Fluid", nbt2);
         blockEntity.readNbt(nbt);
+    }
+    public static void setStoredFluid(FluidTankBlockEntity blockEntity, Fluid fluid, int addAmount) {
+        if (getStoredFluidAmount(blockEntity) + addAmount > getCapacity(blockEntity)) return;
+        setStoredFluid(blockEntity, Registries.FLUID.getId(fluid).toString(), getStoredFluidAmount(blockEntity) + addAmount);
     }
     //是否能输出
     private boolean isOutputAvailable(){
@@ -240,7 +211,7 @@ public class FluidTankBlockEntity extends BlockEntity implements Inventory, Name
     //放入物品
     private boolean onInsertItem(ItemStack stack){
         if (stack.isOf(Items.BUCKET)) {//取出
-            return this.onTakeFluid();
+            return this.onTakeFluid(1000);
         } else if (stack.getItem() instanceof BucketItem) {//放入
             for (Fluid fluid : Registries.FLUID){
                 if (fluid.isStill(fluid.getDefaultState())){
@@ -263,7 +234,7 @@ public class FluidTankBlockEntity extends BlockEntity implements Inventory, Name
         }
         String id = getStoredFluidName(this);
         int amount = getStoredFluidAmount(this);
-        if ((!id.isEmpty() && !fluid.matchesType(Registries.FLUID.get(new Identifier(id)))) || !this.getStack(INPUT_SLOT_ID).isOf(fluid.getBucketItem()) || amount+1000 > MAX_AMOUNT){
+        if ((!id.isEmpty() && !fluid.matchesType(Registries.FLUID.get(new Identifier(id)))) || !this.getStack(INPUT_SLOT_ID).isOf(fluid.getBucketItem()) || amount+1000 > getCapacity(this) || fluid.getTemperature() > getMaxTemperature(this)){
             return false;
         }
         this.removeStack(INPUT_SLOT_ID, 1);
@@ -274,23 +245,50 @@ public class FluidTankBlockEntity extends BlockEntity implements Inventory, Name
 
     /**
      * 取出流体
+     * @param takeAmount 取出的流体数量
      * @return 是否成功取出
      */
-    private boolean onTakeFluid(){
+    private boolean onTakeFluid(int takeAmount){
         String id = getStoredFluidName(this);
         int amount = getStoredFluidAmount(this);
         Fluid fluid = Registries.FLUID.get(new Identifier(id));
-        if (id.isEmpty() || amount < 1000 || !this.isOutputAvailable(fluid.getBucketItem())){
+        if (id.isEmpty() || amount < takeAmount || !this.isOutputAvailable(fluid.getBucketItem())){
             return false;
         }
         ItemStack result = new ItemStack(fluid.getBucketItem(), this.getStack(OUTPUT_SLOT_ID).getCount()+1);
         this.removeStack(INPUT_SLOT_ID, 1);
         this.setStack(OUTPUT_SLOT_ID, result);
-        if (amount - 1000 <= 0){//没了
+        if (amount - takeAmount <= 0){//没了
             setStoredFluid(this, "", 0);//重新设置为空
             return true;
         }
-        setStoredFluid(this, id, amount-1000);
+        setStoredFluid(this, id, amount-takeAmount);
         return true;
+    }
+
+    @Override
+    public int getSpeed() {
+        return 0;
+    }
+
+    @Override
+    public int getMaxTemperature() {
+        return this.maxTemperature;
+    }
+
+    @Override
+    public Tank getTank() {
+        return this.tank;
+    }
+
+    @Override
+    public Tank.Faces getFacesType(World world, BlockPos pos, Direction direction, BlockPos newPos, BlockEntity newBlockEntity) {
+        boolean powered = world.getReceivedRedstonePower(pos) != 0;
+        if (powered) return Tank.Faces.NONE;
+        return switch (direction) {
+            case UP -> Tank.Faces.INSERT;
+            case DOWN -> Tank.Faces.EXTRACT;
+            default -> Tank.Faces.BOTH;
+        };
     }
 }

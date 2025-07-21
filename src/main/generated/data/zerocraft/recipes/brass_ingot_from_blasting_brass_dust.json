@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.3,
+  "group": "brass_ingot_from_dust",
+  "ingredient": {
+    "item": "zerocraft:brass_dust"
+  },
+  "result": "zerocraft:brass_ingot"
+}

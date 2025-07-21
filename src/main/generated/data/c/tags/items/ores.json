@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "zerocraft:scarlet_crystal_ore",
+    "zerocraft:deepslate_scarlet_crystal_ore",
+    "zerocraft:tin_ore",
+    "zerocraft:deepslate_tin_ore",
+    "zerocraft:zinc_ore",
+    "zerocraft:deepslate_zinc_ore"
+  ]
+}

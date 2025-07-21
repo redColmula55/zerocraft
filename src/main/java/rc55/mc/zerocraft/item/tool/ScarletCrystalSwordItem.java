@@ -10,12 +10,13 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import rc55.mc.zerocraft.ZeroCraft;
+import rc55.mc.zerocraft.api.Utils;
 import rc55.mc.zerocraft.client.ZeroCraftKeyBinds;
 
 import java.util.List;
@@ -24,11 +25,7 @@ public class ScarletCrystalSwordItem extends SwordItem implements Vanishable {
     public ScarletCrystalSwordItem() {
         super(ZeroCraftToolMaterials.SCARLET_CRYSTAL, 3, -1.8f, new Item.Settings().fireproof().rarity(Rarity.RARE));
     }
-    /*//防bug
-    @Override
-    public String getTranslationKey(){
-        return Util.createTranslationKey("item", Registries.ITEM.getId(this));
-    }*/
+
     //模式本地化键
     private final String FLAME_MODE_TRANS_KEY = "item.zerocraft.scarlet_crystal_sword.mode.flame";
     private final String FROST_MODE_TRANS_KEY = "item.zerocraft.scarlet_crystal_sword.mode.frost";
@@ -62,7 +59,6 @@ public class ScarletCrystalSwordItem extends SwordItem implements Vanishable {
                     break;
             }
         }
-        //super.postHit(stack, target, attacker);
         stack.damage(1, attacker, (e) -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
         return true;
     }
@@ -71,15 +67,15 @@ public class ScarletCrystalSwordItem extends SwordItem implements Vanishable {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context){
         super.appendTooltip(stack, world, tooltip, context);
 
-        tooltip.add(Text.translatable(this.getTranslationKey()+".mode.hint", new Object[]{ZeroCraftKeyBinds.TOOL_MODE_SWITCH_KEY.getBoundKeyTranslationKey()}).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable(this.getTranslationKey()+".mode.hint", ZeroCraftKeyBinds.TOOL_MODE_SWITCH_KEY.getBoundKeyLocalizedText()).formatted(Formatting.GRAY));
 
         byte mode = stack.getOrCreateNbt().getByte("mode");
         switch (mode){
             case 1:
-                tooltip.add(Text.translatable(this.getTranslationKey()+".mode.current", new Object[]{Text.translatable(FROST_MODE_TRANS_KEY)}));
+                tooltip.add(Text.translatable(this.getTranslationKey()+".mode.current", Text.translatable(FROST_MODE_TRANS_KEY)));
                 break;
             case 2:
-                tooltip.add(Text.translatable(this.getTranslationKey()+".mode.current", new Object[]{Text.translatable(FLAME_MODE_TRANS_KEY)}));
+                tooltip.add(Text.translatable(this.getTranslationKey()+".mode.current", Text.translatable(FLAME_MODE_TRANS_KEY)));
                 break;
         }
     }
@@ -100,14 +96,11 @@ public class ScarletCrystalSwordItem extends SwordItem implements Vanishable {
                         //是否在主手
                         if (serverStack.isOf(this)){
                             //模式切换
-                            sendMessage(serverPlayer, Text.translatable(this.getTranslationKey()+".mode.switch", new Object[]{Text.translatable(setMode(serverStack))}));
+                            Utils.sendMessage(serverPlayer, Text.translatable(this.getTranslationKey()+".mode.switch", Text.translatable(setMode(serverStack))));
                         }
                     }
-                    //sendMessage(serverPlayer, Text.of("[debug/server] Sword received pack."));//调试信息
                 });
             });
-            //调试信息
-            //if (player.getStackInHand(player.getActiveHand()) == stack){ sendMessage(player, Text.of("[debug/server] Holding Sword.")); }
         }
     }
     //格挡
@@ -130,11 +123,5 @@ public class ScarletCrystalSwordItem extends SwordItem implements Vanishable {
         }
         user.setCurrentHand(hand);
         return TypedActionResult.consume(itemStack);
-    }
-
-    //发送消息
-    //仅服务端
-    private static void sendMessage(PlayerEntity player, Text message) {
-        ((ServerPlayerEntity)player).sendMessageToClient(message, true);
     }
 }

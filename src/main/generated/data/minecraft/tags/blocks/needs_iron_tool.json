@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "zerocraft:tin_block",
+    "zerocraft:zinc_block",
+    "zerocraft:bronze_block",
+    "zerocraft:brass_block"
+  ]
+}

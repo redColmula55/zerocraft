@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.3,
+  "group": "tin_ingot_smelt",
+  "ingredient": {
+    "item": "zerocraft:raw_tin"
+  },
+  "result": "zerocraft:tin_ingot"
+}

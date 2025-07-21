@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "zerocraft:block/wooden_fluid_tank"
+    }
+  }
+}

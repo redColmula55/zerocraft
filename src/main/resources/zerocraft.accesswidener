@@ -1,2 +1,8 @@
 accessWidener v2 named
 
+#桶内流体
+accessible field net/minecraft/item/BucketItem fluid Lnet/minecraft/fluid/Fluid;
+#流体流动-用于向上漂浮的流体
+#总之就是非常抽象
+accessible method net/minecraft/fluid/FlowableFluid receivesFlow (Lnet/minecraft/util/math/Direction;Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)Z
+accessible method net/minecraft/fluid/FlowableFluid canFill (Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/fluid/Fluid;)Z

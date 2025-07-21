@@ -15,8 +15,6 @@ public class ScarletCrystalBootsItem extends ArmorItem {
         super(ZeroCraftArmorMaterials.SCARLET_CRYSTAL, Type.BOOTS, new Settings().rarity(Rarity.RARE).fireproof());
     }
 
-    //public static final Identifier PACK_ID = new Identifier(ZeroCraft.MODID, "key_fly_boots");
-
     //每刻执行
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {

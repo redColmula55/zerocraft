@@ -1,0 +1,28 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "rc55.mc.zerocraft.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"PlayerEntityMixin",
+		"EnchantmentMixin",
+		"UnbreakingEnchantmentMixin",
+		"WaterFluidMixin",
+		"KelpBlockMixin",
+		"CoralBlockBlockMixin",
+		"CoralParentBlockMixin",
+		"DeadCoralWallFanBlockMixin",
+		"SeagrassBlockMixin",
+		"FishingBobberEntityMixin",
+		"FluidMixin"
+	],
+	"client": [
+
+	],
+	"server": [
+
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

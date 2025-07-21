@@ -2,10 +2,8 @@ package rc55.mc.zerocraft.dataGen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
-import rc55.mc.zerocraft.worldGen.ZeroCraftConfiguredFeatures;
 
 import java.util.concurrent.CompletableFuture;
 

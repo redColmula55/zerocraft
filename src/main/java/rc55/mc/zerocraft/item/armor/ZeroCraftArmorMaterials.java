@@ -1,8 +1,10 @@
 package rc55.mc.zerocraft.item.armor;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ArmorMaterials;
+import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -15,7 +17,7 @@ import java.util.EnumMap;
 import java.util.function.Supplier;
 
 public enum ZeroCraftArmorMaterials implements ArmorMaterial, StringIdentifiable {
-    SCARLET_CRYSTAL("scarlet_crystal", 42, Util.make(new EnumMap(ArmorItem.Type.class), map -> {
+    SCARLET_CRYSTAL("scarlet_crystal", 42, Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
         map.put(ArmorItem.Type.BOOTS, 3);
         map.put(ArmorItem.Type.LEGGINGS, 6);
         map.put(ArmorItem.Type.CHESTPLATE, 8);
@@ -23,7 +25,7 @@ public enum ZeroCraftArmorMaterials implements ArmorMaterial, StringIdentifiable
     }), 25, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4.0F, 0.2F, () -> Ingredient.ofItems(ZeroCraftItems.SCARLET_CRYSTAL_INGOT));
 
     public static final StringIdentifiable.Codec<ArmorMaterials> CODEC = StringIdentifiable.createCodec(ArmorMaterials::values);
-    private static final EnumMap<ArmorItem.Type, Integer> BASE_DURABILITY = Util.make(new EnumMap(ArmorItem.Type.class), map -> {
+    private static final EnumMap<ArmorItem.Type, Integer> BASE_DURABILITY = Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
         map.put(ArmorItem.Type.BOOTS, 13);
         map.put(ArmorItem.Type.LEGGINGS, 15);
         map.put(ArmorItem.Type.CHESTPLATE, 16);
@@ -51,12 +53,12 @@ public enum ZeroCraftArmorMaterials implements ArmorMaterial, StringIdentifiable
 
     @Override
     public int getDurability(ArmorItem.Type type) {
-        return (Integer)BASE_DURABILITY.get(type) * this.durabilityMultiplier;
+        return BASE_DURABILITY.get(type) * this.durabilityMultiplier;
     }
 
     @Override
     public int getProtection(ArmorItem.Type type) {
-        return (Integer)this.protectionAmounts.get(type);
+        return this.protectionAmounts.get(type);
     }
 
     @Override
@@ -92,5 +94,19 @@ public enum ZeroCraftArmorMaterials implements ArmorMaterial, StringIdentifiable
     @Override
     public String asString() {
         return this.name;
+    }
+
+    //是否有全套盔甲
+    public static boolean hasFullSet(LivingEntity entity, ArmorMaterial material) {
+        for (ItemStack stack : entity.getArmorItems()) {
+            if (stack.getItem() instanceof ArmorItem armorItem) {
+                if (armorItem.getMaterial() != material) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 }

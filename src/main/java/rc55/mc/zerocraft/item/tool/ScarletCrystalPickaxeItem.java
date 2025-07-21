@@ -3,7 +3,7 @@ package rc55.mc.zerocraft.item.tool;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
@@ -39,14 +39,8 @@ public class ScarletCrystalPickaxeItem extends PickaxeItem {
     }
     //掉落物品
     @Override
-    public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
-        ScarletCrystalMiningTools.postMine(stack, world, state, pos, miner);
-        return super.postMine(stack, world, state, pos, miner);
-    }
-    //防止重复掉落
-    //方块实体掉落遵循原版逻辑，防止nbt异常
-    @Override
-    public boolean isSuitableFor(BlockState state) {
-        return state.hasBlockEntity() && state.isToolRequired();
+    public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
+        ScarletCrystalMiningTools.updateMine(world, pos, state, miner);
+        return miner.isCreative();
     }
 }

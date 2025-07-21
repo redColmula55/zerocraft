@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "scarlet_crystal_ingot",
+  "ingredients": [
+    {
+      "item": "zerocraft:scarlet_crystal_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "zerocraft:scarlet_crystal_ingot"
+  }
+}

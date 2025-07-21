@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#c:ores/tin",
+    "#c:ores/zinc",
+    "zerocraft:raw_tin_block",
+    "zerocraft:raw_zinc_block"
+  ]
+}

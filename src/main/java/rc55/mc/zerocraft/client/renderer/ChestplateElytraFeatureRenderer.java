@@ -29,7 +29,7 @@ public class ChestplateElytraFeatureRenderer<T extends LivingEntity, M extends E
     private static final Identifier SKIN = new Identifier("textures/entity/elytra.png");
     private final ElytraEntityModel<T> elytra;
 
-    public ChestplateElytraFeatureRenderer(FeatureRendererContext context, EntityModelLoader loader) {
+    public ChestplateElytraFeatureRenderer(FeatureRendererContext<T, M> context, EntityModelLoader loader) {
         super(context);
         this.elytra = new ElytraEntityModel<>(loader.getModelPart(EntityModelLayers.ELYTRA));
     }

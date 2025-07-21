@@ -11,6 +11,7 @@ import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.util.Identifier;
 import rc55.mc.zerocraft.ZeroCraft;
 import rc55.mc.zerocraft.client.renderer.ChestplateElytraFeatureRenderer;
+import rc55.mc.zerocraft.client.renderer.FlotableFluidRenderHandler;
 import rc55.mc.zerocraft.fluid.ZeroCraftFluids;
 
 @Environment(EnvType.CLIENT)
@@ -34,7 +35,9 @@ public class ZeroCraftRenderers {
     private static void addFluidRenderer() {
         //透明
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ZeroCraftFluids.SCARLET_WATER, ZeroCraftFluids.FLOWING_SCARLET_WATER);
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ZeroCraftFluids.STEAM, ZeroCraftFluids.FLOWING_STEAM);
         //材质
-        FluidRenderHandlerRegistry.INSTANCE.register(ZeroCraftFluids.SCARLET_WATER, ZeroCraftFluids.FLOWING_SCARLET_WATER, new SimpleFluidRenderHandler(new Identifier("minecraft:block/water_still"), new Identifier("minecraft:block/water_flow"), 0xff0000));
+        FluidRenderHandlerRegistry.INSTANCE.register(ZeroCraftFluids.SCARLET_WATER, ZeroCraftFluids.FLOWING_SCARLET_WATER, SimpleFluidRenderHandler.coloredWater(0xff0000));
+        FluidRenderHandlerRegistry.INSTANCE.register(ZeroCraftFluids.STEAM, ZeroCraftFluids.FLOWING_STEAM, new FlotableFluidRenderHandler(new Identifier("minecraft:block/water_still"), new Identifier("minecraft:block/water_flow"), 0xffffff));
     }
 }

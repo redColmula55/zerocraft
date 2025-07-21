@@ -12,7 +12,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -20,6 +19,7 @@ import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import rc55.mc.zerocraft.ZeroCraft;
+import rc55.mc.zerocraft.api.Utils;
 import rc55.mc.zerocraft.client.ZeroCraftKeyBinds;
 
 import java.util.List;
@@ -46,6 +46,7 @@ public class ScarletCrystalChestplateItem extends ArmorItem implements FabricEly
                 player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 221, 1, false, false, false));
                 player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 221, 1, false, false, false));
                 player.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 221, 1, false, false, false));
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 221, 1, false, false, false));
             }
             //按键是否按下
             ServerPlayNetworking.registerGlobalReceiver(PACK_ID, (server, serverPlayer, handler, buf, responseSender) -> {
@@ -56,10 +57,10 @@ public class ScarletCrystalChestplateItem extends ArmorItem implements FabricEly
                     //切换内置鞘翅开关
                     if (fly){
                         nbt.putBoolean("Fly", false);
-                        sendMessage(serverPlayer, Text.translatable(this.getTranslationKey()+".mode.off"));
+                        Utils.sendMessage(serverPlayer, Text.translatable(this.getTranslationKey()+".mode.off"));
                     } else {
                         nbt.putBoolean("Fly", true);
-                        sendMessage(serverPlayer, Text.translatable(this.getTranslationKey()+".mode.on"));
+                        Utils.sendMessage(serverPlayer, Text.translatable(this.getTranslationKey()+".mode.on"));
                     }
                 });
             });
@@ -80,7 +81,7 @@ public class ScarletCrystalChestplateItem extends ArmorItem implements FabricEly
     //物品lore
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context){
-        tooltip.add(Text.translatable(this.getTranslationKey()+".mode.hint", new Object[]{Text.translatable(ZeroCraftKeyBinds.CHESTPLATE_MODE_SWITCH_KEY.getBoundKeyTranslationKey())}).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable(this.getTranslationKey()+".mode.hint", new Object[]{ZeroCraftKeyBinds.CHESTPLATE_MODE_SWITCH_KEY.getBoundKeyLocalizedText()}).formatted(Formatting.GRAY));
         boolean fly = stack.getOrCreateNbt().getBoolean("Fly");
         if (fly){
             tooltip.add(Text.translatable(this.getTranslationKey()+".mode.on"));
@@ -91,10 +92,6 @@ public class ScarletCrystalChestplateItem extends ArmorItem implements FabricEly
     //判断是否可以飞行
     public static boolean isFlyable(ItemStack stack) {
         return stack.getDamage() < stack.getMaxDamage() - 1 && stack.getOrCreateNbt().getBoolean("Fly");
-    }
-    //发送消息
-    private static void sendMessage(PlayerEntity player, Text message) {
-        ((ServerPlayerEntity)player).sendMessageToClient(message, true);
     }
     //是否允许披风渲染
     public static boolean allowCapeRender(AbstractClientPlayerEntity abstractClientPlayerEntity) {
