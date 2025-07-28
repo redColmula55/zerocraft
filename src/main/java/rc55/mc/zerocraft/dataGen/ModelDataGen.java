@@ -3,6 +3,7 @@ package rc55.mc.zerocraft.dataGen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.minecraft.block.CropBlock;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
@@ -31,6 +32,8 @@ public class ModelDataGen extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ZeroCraftBlocks.BRONZE_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ZeroCraftBlocks.BRASS_BLOCK);
 
+        blockStateModelGenerator.registerCrop(ZeroCraftBlocks.CABBAGE_CROP, ((CropBlock)ZeroCraftBlocks.CABBAGE_CROP).getAgeProperty(), 0, 1, 2, 3);
+
         blockStateModelGenerator.registerSimpleCubeAll(ZeroCraftBlocks.FLUID_TANK);
         blockStateModelGenerator.registerSimpleCubeAll(ZeroCraftBlocks.WOODEN_FLUID_TANK);
     }
@@ -54,6 +57,12 @@ public class ModelDataGen extends FabricModelProvider {
         itemModelGenerator.register(ZeroCraftItems.ZINC_NUGGET, Models.GENERATED);
         itemModelGenerator.register(ZeroCraftItems.BRONZE_NUGGET, Models.GENERATED);
         itemModelGenerator.register(ZeroCraftItems.BRASS_NUGGET, Models.GENERATED);
+
+        itemModelGenerator.register(ZeroCraftItems.SANDWICH, Models.GENERATED);
+        itemModelGenerator.register(ZeroCraftItems.BREAD_SLICE, Models.GENERATED);
+        itemModelGenerator.register(ZeroCraftItems.CHEESE, Models.GENERATED);
+
+        itemModelGenerator.register(ZeroCraftItems.IRON_KNIFE, Models.HANDHELD);
 
         itemModelGenerator.register(ZeroCraftItems.SCARLET_WATER_BUCKET, Models.GENERATED);
         itemModelGenerator.register(ZeroCraftItems.STEAM_BUCKET, Models.GENERATED);

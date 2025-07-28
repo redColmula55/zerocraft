@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
@@ -75,6 +76,12 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
                 .addTag(ZeroCraftItemTags.TIN_NUGGETS).addTag(ZeroCraftItemTags.ZINC_NUGGETS).addTag(ZeroCraftItemTags.BRONZE_NUGGETS).addTag(ZeroCraftItemTags.BRASS_NUGGETS);
         getOrCreateTagBuilder(ConventionalItemTags.DUSTS).addTag(ZeroCraftItemTags.COPPER_DUSTS)
                 .addTag(ZeroCraftItemTags.TIN_DUSTS).addTag(ZeroCraftItemTags.ZINC_DUSTS).addTag(ZeroCraftItemTags.BRONZE_DUSTS).addTag(ZeroCraftItemTags.BRASS_DUSTS);
+
+        getOrCreateTagBuilder(ConventionalItemTags.FOODS).add(ZeroCraftItems.SANDWICH).add(ZeroCraftItems.CABBAGE, ZeroCraftItems.BREAD_SLICE, ZeroCraftItems.CHEESE);
+        getOrCreateTagBuilder(ZeroCraftItemTags.COOKED_MEATS).add(Items.COOKED_BEEF, Items.COOKED_MUTTON, Items.COOKED_PORKCHOP, Items.COOKED_CHICKEN, Items.COOKED_COD, Items.COOKED_SALMON, Items.COOKED_RABBIT);
+        getOrCreateTagBuilder(ZeroCraftItemTags.VEGETABLES).add(Items.POTATO, Items.CARROT, ZeroCraftItems.CABBAGE);
+
+        getOrCreateTagBuilder(ZeroCraftItemTags.KNIVES).add(ZeroCraftItems.IRON_KNIFE);
     }
 
     private void addToTag(TagKey<Item> tag, ItemConvertible... items) {

@@ -3,7 +3,9 @@ package rc55.mc.zerocraft.dataGen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -47,6 +49,18 @@ public class RecipeDataGen extends FabricRecipeProvider {
         //合金粉
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ZeroCraftItems.BRONZE_DUST, 4).input(Ingredient.fromTag(ZeroCraftItemTags.COPPER_DUSTS), 3).input(ZeroCraftItemTags.TIN_DUSTS).criterion(hasItem(ZeroCraftItems.TIN_DUST), conditionsFromItem(ZeroCraftItems.TIN_DUST)).offerTo(consumer);
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ZeroCraftItems.BRASS_DUST, 4).input(Ingredient.fromTag(ZeroCraftItemTags.COPPER_DUSTS), 3).input(ZeroCraftItemTags.ZINC_DUSTS).criterion(hasItem(ZeroCraftItems.ZINC_DUST), conditionsFromItem(ZeroCraftItems.ZINC_DUST)).offerTo(consumer);
+        //食物
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, ZeroCraftItems.BREAD_SLICE, 3)
+                .input(Ingredient.fromTag(ZeroCraftItemTags.KNIVES)).input(Ingredient.ofItems(Items.BREAD))
+                .criterion(hasItem(Items.BREAD), conditionsFromItem(Items.BREAD)).offerTo(consumer);
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.FOOD, ZeroCraftItems.SANDWICH)
+                .input(Ingredient.ofItems(ZeroCraftItems.BREAD_SLICE), 2)
+                .input(Ingredient.fromTag(ZeroCraftItemTags.COOKED_MEATS))
+                .input(Ingredient.fromTag(ZeroCraftItemTags.VEGETABLES))
+                .input(Ingredient.ofItems(ZeroCraftItems.CHEESE))
+                .criterion(hasItem(ZeroCraftItems.CHEESE), conditionsFromItem(ZeroCraftItems.CHEESE)).offerTo(consumer);
+        //工具
+        createKnifeRecipe(ZeroCraftItems.IRON_KNIFE, Items.IRON_INGOT, "iron_knife", consumer);
         //熔炉
         offerSmelting(consumer, SCARLET_CRYSTAL_ORES, RecipeCategory.MISC, ZeroCraftItems.SCARLET_CRYSTAL, 0.7f, 200, "scarlet_crystal_from_ore");
         offerBlasting(consumer, SCARLET_CRYSTAL_ORES, RecipeCategory.MISC, ZeroCraftItems.SCARLET_CRYSTAL, 0.3f, 100, "scarlet_crystal_from_ore");
@@ -60,5 +74,18 @@ public class RecipeDataGen extends FabricRecipeProvider {
         offerBlasting(consumer, List.of(ZeroCraftItems.BRONZE_DUST), RecipeCategory.MISC, ZeroCraftItems.BRONZE_INGOT, 0.3f, 100, "bronze_ingot_from_dust");
         offerSmelting(consumer, List.of(ZeroCraftItems.BRASS_DUST), RecipeCategory.MISC, ZeroCraftItems.BRASS_INGOT, 0.7f, 200, "brass_ingot_from_dust");
         offerBlasting(consumer, List.of(ZeroCraftItems.BRASS_DUST), RecipeCategory.MISC, ZeroCraftItems.BRASS_INGOT, 0.3f, 100, "brass_ingot_from_dust");
+    }
+
+    private void createKnifeRecipe(Item knife, Item ingredient, String group, Consumer<RecipeJsonProvider> consumer) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, knife).group(group)
+                .input('a', Items.STICK).input('b', ingredient)
+                .pattern("b ").pattern(" a")
+                .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
+                .offerTo(consumer);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, knife).group(group)
+                .input('a', Items.STICK).input('b', ingredient)
+                .pattern(" b").pattern("a ")
+                .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
+                .offerTo(consumer, new Identifier(ZeroCraft.MODID, group + "2"));
     }
 }

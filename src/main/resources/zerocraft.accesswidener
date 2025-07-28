@@ -6,3 +6,5 @@ accessible field net/minecraft/item/BucketItem fluid Lnet/minecraft/fluid/Fluid;
 #总之就是非常抽象
 accessible method net/minecraft/fluid/FlowableFluid receivesFlow (Lnet/minecraft/util/math/Direction;Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)Z
 accessible method net/minecraft/fluid/FlowableFluid canFill (Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/fluid/Fluid;)Z
+#
+accessible method net/minecraft/block/CropBlock getAgeProperty ()Lnet/minecraft/state/property/IntProperty;

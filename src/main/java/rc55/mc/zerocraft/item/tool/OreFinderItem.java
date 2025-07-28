@@ -83,6 +83,7 @@ public class OreFinderItem extends Item {
             Utils.sendMessage(player, Text.translatable(DAMAGE_TRANS_KEY));
             return ActionResult.PASS;
         }
+        player.getItemCooldownManager().set(this, 100);
         final int range = 55;
         BlockPos blockPos = null;
         boolean shouldBreak = false;

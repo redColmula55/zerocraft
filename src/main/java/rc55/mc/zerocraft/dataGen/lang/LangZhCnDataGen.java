@@ -57,8 +57,16 @@ public class LangZhCnDataGen extends FabricLanguageProvider {
         translationBuilder.add(ZeroCraftItems.BRASS_INGOT, "黄铜锭");
         translationBuilder.add(ZeroCraftItems.BRASS_DUST, "黄铜粉");
         translationBuilder.add(ZeroCraftItems.BRASS_NUGGET, "黄铜粒");
+        translationBuilder.add(ZeroCraftItems.SANDWICH, "三明治");
+        translationBuilder.add(ZeroCraftItems.CABBAGE, "包菜");
+        translationBuilder.add(ZeroCraftItems.CHEESE, "芝士");
+        translationBuilder.add(ZeroCraftItems.BREAD_SLICE, "面包片");
+
         translationBuilder.add(ZeroCraftBlocks.SCARLET_WATER, "赤潮污染水");
         translationBuilder.add(ZeroCraftBlocks.STEAM, "蒸汽");
+        translationBuilder.add(ZeroCraftBlocks.CABBAGE_CROP, "包菜植株");
+
+        translationBuilder.add(ZeroCraftItems.IRON_KNIFE, "铁刀");
 
         translationBuilder.add(ZeroCraftBlocks.FLUID_TANK, "流体储罐");
         translationBuilder.add(ZeroCraftBlocks.WOODEN_FLUID_TANK, "木制简易储罐");

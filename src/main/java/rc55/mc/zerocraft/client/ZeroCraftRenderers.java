@@ -10,6 +10,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.util.Identifier;
 import rc55.mc.zerocraft.ZeroCraft;
+import rc55.mc.zerocraft.block.ZeroCraftBlocks;
 import rc55.mc.zerocraft.client.renderer.ChestplateElytraFeatureRenderer;
 import rc55.mc.zerocraft.client.renderer.FlotableFluidRenderHandler;
 import rc55.mc.zerocraft.fluid.ZeroCraftFluids;
@@ -19,6 +20,7 @@ public class ZeroCraftRenderers {
     //初始化注册
     public static void addRenderer(){
         addFeatureRenderer();
+        setTransparentBlockRender();
         addFluidRenderer();
         ZeroCraft.LOGGER.info("Added renderers.");
     }
@@ -30,6 +32,10 @@ public class ZeroCraftRenderers {
                 registrationHelper.register(new ChestplateElytraFeatureRenderer<>(livingEntityRenderer, context.getModelLoader()));
             }
         }));
+    }
+    //渲染透明/半透明方块
+    private static void setTransparentBlockRender() {
+        BlockRenderLayerMap.INSTANCE.putBlock(ZeroCraftBlocks.CABBAGE_CROP, RenderLayer.getCutout());
     }
     //渲染流体
     private static void addFluidRenderer() {

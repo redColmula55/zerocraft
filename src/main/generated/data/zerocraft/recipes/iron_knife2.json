@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "iron_knife",
+  "key": {
+    "a": {
+      "item": "minecraft:stick"
+    },
+    "b": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    " b",
+    "a "
+  ],
+  "result": {
+    "item": "zerocraft:iron_knife"
+  },
+  "show_notification": true
+}

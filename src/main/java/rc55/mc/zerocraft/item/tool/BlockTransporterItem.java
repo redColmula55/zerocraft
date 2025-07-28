@@ -96,6 +96,7 @@ public class BlockTransporterItem extends Item {
         PlayerEntity player = context.getPlayer();
         BlockPos pos = context.getBlockPos();
         BlockState blockState = getBlock(stack).getDefaultState();
+        if (player != null) player.getItemCooldownManager().set(this, 20);
         if (blockState.isOf(getBlock(stack))){
             //方块状态
             if (nbt.getCompound("State") != null){

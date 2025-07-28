@@ -20,6 +20,8 @@ import net.minecraft.world.World;
 import rc55.mc.zerocraft.api.inventory.ItemInventory;
 import rc55.mc.zerocraft.screen.Generic1x1ContainerScreenHandler;
 
+import java.util.Optional;
+
 public class DebugWandItem extends Item {
     public DebugWandItem() {
         super(new Settings().rarity(Rarity.EPIC).fireproof().maxCount(1));
@@ -64,7 +66,7 @@ public class DebugWandItem extends Item {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        return openSettingsScreen(context.getWorld(), context.getPlayer(), context.getStack());
+        return this.openSettingsScreen(context.getWorld(), context.getPlayer(), context.getStack());
     }
 
     private ActionResult openSettingsScreen(World world, PlayerEntity player, ItemStack stack) {
@@ -87,8 +89,9 @@ public class DebugWandItem extends Item {
 
         @Override
         public void onClose(PlayerEntity player) {
-            player.sendMessage(Text.of(this.getStack(0).getOrCreateNbt().toString()));
-            player.giveItemStack(this.getStack(0));
+            ItemStack stack = this.getStack(0);
+            Optional.ofNullable(stack.getNbt()).ifPresent(nbt -> player.sendMessage(Text.of(nbt.toString())));
+            player.giveItemStack(stack);
             this.setStack(0, ItemStack.EMPTY);
             super.onClose(player);
         }

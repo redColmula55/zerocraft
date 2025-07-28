@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "zerocraft:bread_slice"
+    },
+    {
+      "item": "zerocraft:bread_slice"
+    },
+    {
+      "tag": "c:foods/cooked_meat"
+    },
+    {
+      "tag": "c:foods/vegetable"
+    },
+    {
+      "item": "zerocraft:cheese"
+    }
+  ],
+  "result": {
+    "item": "zerocraft:sandwich"
+  }
+}

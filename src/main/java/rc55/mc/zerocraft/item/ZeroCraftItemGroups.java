@@ -83,6 +83,7 @@ public class ZeroCraftItemGroups {
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_CHESTPLATE);
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_LEGGINGS);
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_BOOTS);
+                    entries.add(ZeroCraftItems.IRON_KNIFE);
                 })).build());
 
         Registry.register(Registries.ITEM_GROUP, MACHINES, FabricItemGroup.builder()
@@ -98,10 +99,15 @@ public class ZeroCraftItemGroups {
 
         Registry.register(Registries.ITEM_GROUP, FOODS, FabricItemGroup.builder()
                 .displayName(Text.translatable(Utils.getItemGroupTransKey(FOODS)))
-                .icon(() -> new ItemStack(ZeroCraftItems.WRENCH))
+                .icon(() -> new ItemStack(ZeroCraftItems.SANDWICH))
                 .entries(((displayContext, entries) -> {
+                    entries.add(ZeroCraftItems.SANDWICH);
+                    entries.add(ZeroCraftItems.CABBAGE);
+                    entries.add(ZeroCraftItems.CHEESE);
+                    entries.add(ZeroCraftItems.BREAD_SLICE);
                 })).build());
 
+        /* 未实现-暂无物品*/
         Registry.register(Registries.ITEM_GROUP, FURNITURES, FabricItemGroup.builder()
                 .displayName(Text.translatable(Utils.getItemGroupTransKey(FURNITURES)))
                 .icon(() -> new ItemStack(ZeroCraftItems.WRENCH))

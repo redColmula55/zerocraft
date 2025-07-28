@@ -8,14 +8,15 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import rc55.mc.zerocraft.ZeroCraft;
 import rc55.mc.zerocraft.api.Utils;
 
 import java.util.HashMap;
@@ -36,23 +37,39 @@ public class BeheadingEnchantment extends Enchantment {
         return super.isAcceptableItem(stack) || stack.isIn(ItemTags.AXES);
     }
 
+    //怪物及其对应头颅物品堆
+    private static Map<EntityType<?>, ItemStack> mobSkulls = new HashMap<>();
+
+    static {
+        registerSkullForEntity(EntityType.ZOMBIE, Items.ZOMBIE_HEAD);
+        registerSkullForEntity(EntityType.SKELETON, Items.SKELETON_SKULL);
+        registerSkullForEntity(EntityType.CREEPER, Items.CREEPER_HEAD);
+        registerSkullForEntity(EntityType.WITHER_SKELETON, Items.WITHER_SKELETON_SKULL);
+        registerSkullForEntity(EntityType.ENDER_DRAGON, Items.DRAGON_HEAD);
+        registerSkullForEntity(EntityType.PIGLIN, Items.PIGLIN_HEAD);
+        registerSkullForEntity(EntityType.PIGLIN_BRUTE, Items.PIGLIN_HEAD);
+    }
+
     /**
-     * 设置对应怪物掉落的怪物头颅（不包括玩家）
+     * 为实体注册斩首附魔会掉落的头
+     */
+    public static void registerSkullForEntity(EntityType<? extends LivingEntity> type, ItemConvertible item) {
+        registerSkullForEntity(type, new ItemStack(item));
+    }
+    public static void registerSkullForEntity(EntityType<? extends LivingEntity> type, ItemStack stack) {
+        if (mobSkulls.containsKey(type)) {
+            ZeroCraft.LOGGER.error("Duplicate registration for entity {}, ignoring!", type);
+        } else {
+            mobSkulls.put(type, stack);
+        }
+    }
+
+    /**
+     * 怪物掉落的对应头颅（不包括玩家）
      * @return 包含所有怪物对应头颅的 Map
      */
     public static Map<EntityType<?>, ItemStack> getMobSkull() {
-        Map<EntityType<?>, ItemStack> map = new HashMap<>();
-
-        map.put(EntityType.ZOMBIE, Items.ZOMBIE_HEAD.getDefaultStack());
-        map.put(EntityType.SKELETON, Items.SKELETON_SKULL.getDefaultStack());
-        map.put(EntityType.CREEPER, Items.CREEPER_HEAD.getDefaultStack());
-        map.put(EntityType.WITHER_SKELETON, Items.WITHER_SKELETON_SKULL.getDefaultStack());
-        map.put(EntityType.ENDER_DRAGON, Items.DRAGON_HEAD.getDefaultStack());
-        map.put(EntityType.PIGLIN, Items.PIGLIN_HEAD.getDefaultStack());
-        map.put(EntityType.PIGLIN_BRUTE, Items.PIGLIN_HEAD.getDefaultStack());
-        map.put(EntityType.WITHER, new ItemStack(Items.WITHER_SKELETON_SKULL, Random.create().nextBetween(1,3)));//我为什么要做这个
-
-        return map;
+        return mobSkulls;
     }
 
     /**

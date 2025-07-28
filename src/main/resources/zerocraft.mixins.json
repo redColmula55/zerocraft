@@ -14,7 +14,8 @@
 		"DeadCoralWallFanBlockMixin",
 		"SeagrassBlockMixin",
 		"FishingBobberEntityMixin",
-		"FluidMixin"
+		"FluidMixin",
+		"RepairItemRecipeMixin"
 	],
 	"client": [
 

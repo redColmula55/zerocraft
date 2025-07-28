@@ -31,6 +31,11 @@ public class ZeroCraftItemTags {
     public static final TagKey<Item> ZINC_DUSTS = registerConventional("dusts/zinc");
     public static final TagKey<Item> BRONZE_DUSTS = registerConventional("dusts/bronze");
     public static final TagKey<Item> BRASS_DUSTS = registerConventional("dusts/brass");
+    //食物类
+    public static final TagKey<Item> COOKED_MEATS = registerConventional("foods/cooked_meat");
+    public static final TagKey<Item> VEGETABLES = registerConventional("foods/vegetable");
+    //工具类
+    public static final TagKey<Item> KNIVES = registerConventional("tools/knife");
     //注册用
     private static TagKey<Item> register(String id) {
         return TagKey.of(RegistryKeys.ITEM, new Identifier(ZeroCraft.MODID, id));

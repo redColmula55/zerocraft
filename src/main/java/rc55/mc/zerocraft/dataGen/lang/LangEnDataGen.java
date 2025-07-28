@@ -55,8 +55,17 @@ public class LangEnDataGen extends FabricLanguageProvider {
         translationBuilder.add(ZeroCraftItems.BRASS_INGOT, "Brass Ingot");
         translationBuilder.add(ZeroCraftItems.BRASS_DUST, "Brass Dust");
         translationBuilder.add(ZeroCraftItems.BRASS_NUGGET, "Brass Nugget");
+
+        translationBuilder.add(ZeroCraftItems.SANDWICH, "Sandwich");
+        translationBuilder.add(ZeroCraftItems.CABBAGE, "Cabbage");
+        translationBuilder.add(ZeroCraftItems.CHEESE, "Cheese");
+        translationBuilder.add(ZeroCraftItems.BREAD_SLICE, "Bread Slice");
+
         translationBuilder.add(ZeroCraftBlocks.SCARLET_WATER, "Scarlet Tide Polluted Water");
         translationBuilder.add(ZeroCraftBlocks.STEAM, "Steam");
+        translationBuilder.add(ZeroCraftBlocks.CABBAGE_CROP, "Cabbage");
+
+        translationBuilder.add(ZeroCraftItems.IRON_KNIFE, "Iron Knife");
 
         translationBuilder.add(ZeroCraftBlocks.FLUID_TANK, "Copper Fluid Tank");
         translationBuilder.add(ZeroCraftBlocks.WOODEN_FLUID_TANK, "Wooden Fluid Tank");
