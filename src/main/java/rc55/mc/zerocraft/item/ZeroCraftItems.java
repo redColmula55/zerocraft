@@ -53,9 +53,11 @@ public class ZeroCraftItems {
     public static final Item SCARLET_CRYSTAL_AXE = register("scarlet_crystal_axe", new ScarletCrystalAxeItem());
     public static final Item SCARLET_CRYSTAL_SHOVEL = register("scarlet_crystal_shovel", new ScarletCrystalShovelItem());
     public static final Item SCARLET_CRYSTAL_HOE = register("scarlet_crystal_hoe", new ScarletCrystalHoeItem());
-    public static final Item WRENCH = register("wrench", new WrenchItem());
+
     public static final Item BLOCK_TRANSPORTER = register("block_transporter", new BlockTransporterItem());
     public static final Item ORE_FINDER = register("ore_finder", new OreFinderItem());
+
+    public static final Item SCARLET_CRYSTAL_WRENCH = register("scarlet_crystal_wrench", new WrenchItem(ZeroCraftToolMaterials.SCARLET_CRYSTAL, new Item.Settings().maxDamage(568).fireproof().rarity(Rarity.RARE)));
 
     public static final Item IRON_KNIFE = register("iron_knife", new KnifeItem(ToolMaterials.IRON, new FabricItemSettings().maxDamage(250)));
     //盔甲
@@ -74,10 +76,10 @@ public class ZeroCraftItems {
     //技术性
     public static final Item DEBUG_WAND = register("debug_wand", new DebugWandItem());
     //注册用
-    private static Item register(String id, Item item){
+    private static Item register(String id, Item item) {
         return Registry.register(Registries.ITEM,new Identifier(ZeroCraft.MODID,id),item);
     }
-    private static Item register(String id){
+    private static Item register(String id) {
         return register(id, new Item(new Item.Settings()));
     }
     private static Item registerFood(String id, FoodComponent foodComponent) {

@@ -10,7 +10,7 @@ import rc55.mc.zerocraft.screen.Generic1x1ContainerScreenHandler;
 
 public class Generic1x1ContainerHandledScreen extends HandledScreen<Generic1x1ContainerScreenHandler> {
     //材质
-    private static final Identifier TEXTURE = new Identifier(ZeroCraft.MODID, "textures/gui/container/boiler.png");
+    private static final Identifier TEXTURE = new Identifier(ZeroCraft.MODID, "textures/gui/container/generic_1x1.png");
 
     public Generic1x1ContainerHandledScreen(Generic1x1ContainerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);

@@ -46,7 +46,7 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ItemTags.HOES).add(ZeroCraftItems.SCARLET_CRYSTAL_HOE);
 
         getOrCreateTagBuilder(ZeroCraftItemTags.UNENCHANTABLES)
-                .add(ZeroCraftItems.WRENCH, ZeroCraftItems.BLOCK_TRANSPORTER, ZeroCraftItems.ORE_FINDER);
+                .add(ZeroCraftItems.BLOCK_TRANSPORTER, ZeroCraftItems.ORE_FINDER);
 
         addToTag(ConventionalItemTags.ORES, ZeroCraftBlocks.SCARLET_CRYSTAL_ORE, ZeroCraftBlocks.DEEPSLATE_SCARLET_CRYSTAL_ORE,
                 ZeroCraftBlocks.TIN_ORE, ZeroCraftBlocks.DEEPSLATE_TIN_ORE,
@@ -82,6 +82,8 @@ public class ItemTagDataGen extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ZeroCraftItemTags.VEGETABLES).add(Items.POTATO, Items.CARROT, ZeroCraftItems.CABBAGE);
 
         getOrCreateTagBuilder(ZeroCraftItemTags.KNIVES).add(ZeroCraftItems.IRON_KNIFE);
+
+        getOrCreateTagBuilder(ZeroCraftItemTags.WRENCHES).add(ZeroCraftItems.SCARLET_CRYSTAL_WRENCH);
     }
 
     private void addToTag(TagKey<Item> tag, ItemConvertible... items) {

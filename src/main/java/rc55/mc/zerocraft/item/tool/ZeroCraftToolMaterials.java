@@ -1,12 +1,18 @@
 package rc55.mc.zerocraft.item.tool;
 
+import com.google.common.base.Suppliers;
+import net.fabricmc.yarn.constants.MiningLevels;
+import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import rc55.mc.zerocraft.item.ZeroCraftItemTags;
 import rc55.mc.zerocraft.item.ZeroCraftItems;
 
 import java.util.function.Supplier;
 
 public enum ZeroCraftToolMaterials implements ToolMaterial {
+    COPPER(MiningLevels.STONE, 133, 5.0f, 2.0f, 14, () -> Ingredient.ofItems(Items.COPPER_INGOT)),
+    BRONZE(MiningLevels.IRON, 216, 6.0f, 2.0f, 14, () -> Ingredient.fromTag(ZeroCraftItemTags.BRONZE_INGOTS)),
     SCARLET_CRYSTAL(5,2031,12.0f,4.0f,22,() -> Ingredient.ofItems(ZeroCraftItems.SCARLET_CRYSTAL_INGOT));
 
     private final int miningLevel;
@@ -22,7 +28,7 @@ public enum ZeroCraftToolMaterials implements ToolMaterial {
         this.miningSpeed = miningSpeed;
         this.attackDamage = attackDamage;
         this.enchantability = enchantability;
-        this.repairIngredient = repairIngredient;
+        this.repairIngredient = Suppliers.memoize(repairIngredient::get);
     }
 
     @Override

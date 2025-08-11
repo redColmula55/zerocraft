@@ -28,7 +28,7 @@ public class Generic1x1ContainerScreenHandler extends ScreenHandler {
         this.openCondition = openCondition;
         this.inventory = inventory;
         this.addPlayerInventorySlots(playerInventory);
-        this.addSlot(new InputSlot(inventory, 0, 15, 20, insertCondition));
+        this.addSlot(new InputSlot(inventory, 0, 80, 36, insertCondition));
     }
     public Generic1x1ContainerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, Function<PlayerEntity, Boolean> openCondition) {
         this(syncId, playerInventory, inventory, openCondition, stack -> true);

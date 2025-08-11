@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "scarlet_wrench",
+  "key": {
+    "a": {
+      "item": "zerocraft:scarlet_crystal"
+    }
+  },
+  "pattern": [
+    " aa",
+    "aa ",
+    " aa"
+  ],
+  "result": {
+    "item": "zerocraft:scarlet_crystal_wrench"
+  },
+  "show_notification": true
+}

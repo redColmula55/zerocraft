@@ -9,6 +9,7 @@ import rc55.mc.zerocraft.enchantment.ZeroCraftEnchantments;
 import rc55.mc.zerocraft.entity.damage.ZeroCraftDamageTypes;
 import rc55.mc.zerocraft.entity.effect.ZeroCraftStatusEffects;
 import rc55.mc.zerocraft.item.tool.OreFinderItem;
+import rc55.mc.zerocraft.item.tool.WrenchItem;
 import rc55.mc.zerocraft.world.ZeroCraftGameRules;
 import rc55.mc.zerocraft.item.ZeroCraftItemGroups;
 import rc55.mc.zerocraft.item.ZeroCraftItems;
@@ -114,18 +115,16 @@ public class LangZhCnDataGen extends FabricLanguageProvider {
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_LEGGINGS.getTranslationKey()+".hint", "按%s打开护腿物品栏");
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_BOOTS, "赤晶靴子");
 
-        translationBuilder.add(ZeroCraftItems.WRENCH,"扳手");
-        translationBuilder.add(ZeroCraftItems.WRENCH.getTranslationKey()+".hint","左键选择属性，右键进行调整");
-        translationBuilder.add(ZeroCraftItems.WRENCH.getTranslationKey()+".invalid","选择的方块不可用扳手调整！");
-        translationBuilder.add(ZeroCraftItems.WRENCH.getTranslationKey()+".damaged","扳手损坏！");
-        translationBuilder.add(ZeroCraftItems.WRENCH.getTranslationKey()+".empty","选择的方块没有属性！");
-        translationBuilder.add(ZeroCraftItems.WRENCH.getTranslationKey()+".select","选定属性%s（当前为 %s）");
-        translationBuilder.add(ZeroCraftItems.WRENCH.getTranslationKey()+".update","调整属性%s为%s");
+        translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_WRENCH,"赤晶扳手");
+        translationBuilder.add(WrenchItem.HINT_TRANS_KEY,"蹲下+右键调整方块朝向");
+        translationBuilder.add(WrenchItem.INVALID_TRANS_KEY,"该方块不可用扳手调整！");
+        translationBuilder.add(WrenchItem.EMPTY_TRANS_KEY,"该方块没有可调整的属性！");
+        translationBuilder.add(WrenchItem.UPDATE_TRANS_KEY,"调整属性 %s 为 %s");
 
         translationBuilder.add(ZeroCraftItems.ORE_FINDER, "探矿器");
         translationBuilder.add(OreFinderItem.NO_TARGET_TRANS_KEY, "尚未设置想要寻找的矿石！");
         translationBuilder.add(OreFinderItem.DAMAGE_TRANS_KEY, "探矿器损坏！");
-        translationBuilder.add(OreFinderItem.FOUND_ORE_TRANS_KEY, "在 %s 处找到了 %s");
+        translationBuilder.add(OreFinderItem.FOUND_ORE_TRANS_KEY, "在%s处找到了 %s");
         translationBuilder.add(OreFinderItem.NOT_FOUND_TRANS_KEY, "未找到 %s");
         translationBuilder.add(OreFinderItem.HINT_TRANS_KEY, "SHIFT+右键打开GUI并放入你想寻找的矿石，然后右键地面开始探测");
 

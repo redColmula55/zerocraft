@@ -1,10 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "tools",
-  "group": "wrench",
+  "category": "equipment",
+  "group": "scarlet_wrench",
   "key": {
     "a": {
-      "item": "zerocraft:scarlet_crystal_ingot"
+      "item": "zerocraft:scarlet_crystal"
     }
   },
   "pattern": [
@@ -13,7 +13,7 @@
     " a "
   ],
   "result": {
-    "item": "zerocraft:wrench"
+    "item": "zerocraft:scarlet_crystal_wrench"
   },
   "show_notification": true
 }

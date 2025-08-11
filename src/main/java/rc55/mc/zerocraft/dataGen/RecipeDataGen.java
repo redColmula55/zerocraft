@@ -61,6 +61,8 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .criterion(hasItem(ZeroCraftItems.CHEESE), conditionsFromItem(ZeroCraftItems.CHEESE)).offerTo(consumer);
         //工具
         createKnifeRecipe(ZeroCraftItems.IRON_KNIFE, Items.IRON_INGOT, "iron_knife", consumer);
+
+        createWrenchRecipe(ZeroCraftItems.SCARLET_CRYSTAL_WRENCH, ZeroCraftItems.SCARLET_CRYSTAL, "scarlet_wrench", consumer);
         //熔炉
         offerSmelting(consumer, SCARLET_CRYSTAL_ORES, RecipeCategory.MISC, ZeroCraftItems.SCARLET_CRYSTAL, 0.7f, 200, "scarlet_crystal_from_ore");
         offerBlasting(consumer, SCARLET_CRYSTAL_ORES, RecipeCategory.MISC, ZeroCraftItems.SCARLET_CRYSTAL, 0.3f, 100, "scarlet_crystal_from_ore");
@@ -87,5 +89,36 @@ public class RecipeDataGen extends FabricRecipeProvider {
                 .pattern(" b").pattern("a ")
                 .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
                 .offerTo(consumer, new Identifier(ZeroCraft.MODID, group + "2"));
+    }
+
+    private void createWrenchRecipe(Item wrench, Item ingredient, String group, Consumer<RecipeJsonProvider> consumer) {
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, wrench).group(group)
+                .input('a', ingredient)
+                .pattern("a a")
+                .pattern("aaa")
+                .pattern(" a ")
+                .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
+                .offerTo(consumer, new Identifier(ZeroCraft.MODID, group + "1"));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, wrench).group(group)
+                .input('a', ingredient)
+                .pattern(" aa")
+                .pattern("aa ")
+                .pattern(" aa")
+                .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
+                .offerTo(consumer, new Identifier(ZeroCraft.MODID, group + "2"));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, wrench).group(group)
+                .input('a', ingredient)
+                .pattern("aa ")
+                .pattern(" aa")
+                .pattern("aa ")
+                .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
+                .offerTo(consumer, new Identifier(ZeroCraft.MODID, group + "3"));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, wrench).group(group)
+                .input('a', ingredient)
+                .pattern(" a ")
+                .pattern("aaa")
+                .pattern("a a")
+                .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
+                .offerTo(consumer, new Identifier(ZeroCraft.MODID, group + "4"));
     }
 }

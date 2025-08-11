@@ -1,7 +1,9 @@
 package rc55.mc.zerocraft.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -25,7 +27,7 @@ public class ZeroCraftItemGroups {
         return RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(ZeroCraft.MODID, id));
     }
     //注册+初始化
-    public static void regItemGroup(){
+    public static void regItemGroup() {
 
         Registry.register(Registries.ITEM_GROUP, ITEMS, FabricItemGroup.builder()
                 .displayName(Text.translatable(Utils.getItemGroupTransKey(ITEMS)))
@@ -76,14 +78,14 @@ public class ZeroCraftItemGroups {
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_AXE);
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_SHOVEL);
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_HOE);
-                    entries.add(ZeroCraftItems.WRENCH);
-                    entries.add(ZeroCraftItems.BLOCK_TRANSPORTER);
-                    entries.add(ZeroCraftItems.ORE_FINDER);
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_HELMET);
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_CHESTPLATE);
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_LEGGINGS);
                     entries.add(ZeroCraftItems.SCARLET_CRYSTAL_BOOTS);
+                    entries.add(ZeroCraftItems.ORE_FINDER);
+                    entries.add(ZeroCraftItems.BLOCK_TRANSPORTER);
                     entries.add(ZeroCraftItems.IRON_KNIFE);
+                    entries.add(ZeroCraftItems.SCARLET_CRYSTAL_WRENCH);
                 })).build());
 
         Registry.register(Registries.ITEM_GROUP, MACHINES, FabricItemGroup.builder()
@@ -110,10 +112,16 @@ public class ZeroCraftItemGroups {
         /* 未实现-暂无物品*/
         Registry.register(Registries.ITEM_GROUP, FURNITURES, FabricItemGroup.builder()
                 .displayName(Text.translatable(Utils.getItemGroupTransKey(FURNITURES)))
-                .icon(() -> new ItemStack(ZeroCraftItems.WRENCH))
+                .icon(() -> new ItemStack(ZeroCraftItems.SCARLET_CRYSTAL_WRENCH))
                 .entries(((displayContext, entries) -> {
                 })).build());
 
+        putItemToGroup();
         ZeroCraft.LOGGER.info("ZeroCraft item group loaded.");
+    }
+
+    //添加物品到原版物品组
+    private static void putItemToGroup() {
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.OPERATOR).register(entries -> entries.add(ZeroCraftItems.DEBUG_WAND));
     }
 }

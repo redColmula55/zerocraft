@@ -1,5 +1,6 @@
 package rc55.mc.zerocraft.item.armor;
 
+import com.google.common.base.Suppliers;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -48,7 +49,7 @@ public enum ZeroCraftArmorMaterials implements ArmorMaterial, StringIdentifiable
         this.equipSound = equipSound;
         this.toughness = toughness;
         this.knockbackResistance = knockbackResistance;
-        this.repairIngredientSupplier = repairIngredientSupplier;
+        this.repairIngredientSupplier = Suppliers.memoize(repairIngredientSupplier::get);
     }
 
     @Override

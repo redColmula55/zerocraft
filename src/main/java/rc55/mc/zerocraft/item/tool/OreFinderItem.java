@@ -44,7 +44,7 @@ public class OreFinderItem extends Item {
     //附魔光效
     @Override
     public boolean hasGlint(ItemStack stack) {
-        return true;
+        return this.getTargetBlock(stack) != null;
     }
     //禁止附魔
     @Override

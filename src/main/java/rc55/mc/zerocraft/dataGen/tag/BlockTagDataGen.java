@@ -21,19 +21,13 @@ public class BlockTagDataGen extends FabricTagProvider.BlockTagProvider {
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
 
         getOrCreateTagBuilder(ZeroCraftBlockTags.WRENCH_ADJUSTABLE)
-                .add(Blocks.PISTON).add(Blocks.STICKY_PISTON)
-                .add(Blocks.OBSERVER)
-                .add(Blocks.REDSTONE_TORCH).add(Blocks.REDSTONE_WALL_TORCH)
-                .add(Blocks.REPEATER).add(Blocks.COMPARATOR)
-                .add(Blocks.DAYLIGHT_DETECTOR)
-                .add(Blocks.DISPENSER).add(Blocks.DROPPER)
-                .add(Blocks.NOTE_BLOCK)
-                .add(Blocks.TRIPWIRE_HOOK).add(Blocks.TRIPWIRE)
-                .add(Blocks.TRAPPED_CHEST).forceAddTag(BlockTags.SHULKER_BOXES).add(Blocks.HOPPER)
+                .add(Blocks.PISTON, Blocks.STICKY_PISTON, Blocks.OBSERVER, Blocks.DISPENSER, Blocks.DROPPER)
+                .add(Blocks.REPEATER, Blocks.COMPARATOR, Blocks.REDSTONE_TORCH, Blocks.REDSTONE_WALL_TORCH)
+                .add(Blocks.TRAPPED_CHEST, Blocks.HOPPER).forceAddTag(BlockTags.SHULKER_BOXES)
                 .forceAddTag(BlockTags.RAILS)
-                .add(Blocks.SCULK_SENSOR).add(Blocks.CALIBRATED_SCULK_SENSOR).add(Blocks.SCULK_SHRIEKER)
-                .add(Blocks.REDSTONE_WIRE)
-                .forceAddTag(BlockTags.TRAPDOORS).forceAddTag(BlockTags.DOORS).forceAddTag(BlockTags.FENCE_GATES);
+                .add(Blocks.SCULK_SENSOR, Blocks.CALIBRATED_SCULK_SENSOR)
+                .forceAddTag(BlockTags.TRAPDOORS).forceAddTag(BlockTags.DOORS).forceAddTag(BlockTags.FENCE_GATES)
+                .add(ZeroCraftBlocks.FLUID_PIPE, ZeroCraftBlocks.VALVE);
 
         getOrCreateTagBuilder(ZeroCraftBlockTags.SCARLET_CRYSTAL_ORES).add(ZeroCraftBlocks.SCARLET_CRYSTAL_ORE).add(ZeroCraftBlocks.DEEPSLATE_SCARLET_CRYSTAL_ORE);
         getOrCreateTagBuilder(ZeroCraftBlockTags.TIN_ORES).add(ZeroCraftBlocks.TIN_ORE).add(ZeroCraftBlocks.DEEPSLATE_TIN_ORE);

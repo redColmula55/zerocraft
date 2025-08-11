@@ -7,8 +7,9 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import rc55.mc.zerocraft.ZeroCraft;
 import rc55.mc.zerocraft.block.fluid.ScarletWaterFluidBlock;
-import rc55.mc.zerocraft.block.plant.CabbageCropBlock;
+import rc55.mc.zerocraft.block.plant.Age3CropBlock;
 import rc55.mc.zerocraft.fluid.ZeroCraftFluids;
+import rc55.mc.zerocraft.item.ZeroCraftItems;
 
 public class ZeroCraftBlocks {
     //一般方块
@@ -30,7 +31,7 @@ public class ZeroCraftBlocks {
     public static final Block DEEPSLATE_ZINC_ORE = register("deepslate_zinc_ore", new Block(AbstractBlock.Settings.copy(Blocks.DEEPSLATE)));
     public static final Block RAW_ZINC_BLOCK = register("raw_zinc_block", new Block(AbstractBlock.Settings.copy(Blocks.RAW_IRON_BLOCK)));
     //植物
-    public static final Block CABBAGE_CROP = registerNoItem("cabbage_crop", new CabbageCropBlock(AbstractBlock.Settings.copy(Blocks.WHEAT)));
+    public static final Block CABBAGE_CROP = registerNoItem("cabbage_crop", new Age3CropBlock(() -> ZeroCraftItems.CABBAGE));
     //科技线
     //储罐
     public static final Block FLUID_TANK = register("fluid_tank", new FluidTankBlock(16000, 2000, AbstractBlock.Settings.create().solid().hardness(1.0f).requiresTool()));

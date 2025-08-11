@@ -10,6 +10,7 @@ import rc55.mc.zerocraft.enchantment.ZeroCraftEnchantments;
 import rc55.mc.zerocraft.entity.damage.ZeroCraftDamageTypes;
 import rc55.mc.zerocraft.entity.effect.ZeroCraftStatusEffects;
 import rc55.mc.zerocraft.item.tool.OreFinderItem;
+import rc55.mc.zerocraft.item.tool.WrenchItem;
 import rc55.mc.zerocraft.world.ZeroCraftGameRules;
 import rc55.mc.zerocraft.item.ZeroCraftItemGroups;
 import rc55.mc.zerocraft.item.ZeroCraftItems;
@@ -113,13 +114,11 @@ public class LangEnDataGen extends FabricLanguageProvider {
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_LEGGINGS.getTranslationKey()+".hint", "Press %s to open leggings inventory.");
         translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_BOOTS, "Scarlet Boots");
 
-        translationBuilder.add(ZeroCraftItems.WRENCH,"Wrench");
-        translationBuilder.add(ZeroCraftItems.WRENCH.getTranslationKey()+".hint","Left click to select property, right click to adjust.");
-        translationBuilder.add(ZeroCraftItems.WRENCH.getTranslationKey()+".invalid","Selected block cannot be adjusted by wrench!");
-        translationBuilder.add(ZeroCraftItems.WRENCH.getTranslationKey()+".damaged","Wrench damaged!");
-        translationBuilder.add(ZeroCraftItems.WRENCH.getTranslationKey()+".empty", "Selected block doesn't have any property!");
-        translationBuilder.add(ZeroCraftItems.WRENCH.getTranslationKey()+".select","Selected property %s（Currently %s）");
-        translationBuilder.add(ZeroCraftItems.WRENCH.getTranslationKey()+".update","Set property %s to %s");
+        translationBuilder.add(ZeroCraftItems.SCARLET_CRYSTAL_WRENCH,"Scarlet Wrench");
+        translationBuilder.add(WrenchItem.HINT_TRANS_KEY,"Sneak and right click to adjust block facing.");
+        translationBuilder.add(WrenchItem.INVALID_TRANS_KEY,"Selected block cannot be adjusted by wrench!");
+        translationBuilder.add(WrenchItem.EMPTY_TRANS_KEY, "Selected block doesn't have any adjustable property!");
+        translationBuilder.add(WrenchItem.UPDATE_TRANS_KEY,"Set property %s to %s");
 
         translationBuilder.add(ZeroCraftItems.BLOCK_TRANSPORTER,"Block Transporter");
         translationBuilder.add(ZeroCraftItems.BLOCK_TRANSPORTER.getTranslationKey()+".invalid", "Selected block cannot be transported！");

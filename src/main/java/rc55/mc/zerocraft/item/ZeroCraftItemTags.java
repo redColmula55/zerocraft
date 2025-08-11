@@ -36,6 +36,7 @@ public class ZeroCraftItemTags {
     public static final TagKey<Item> VEGETABLES = registerConventional("foods/vegetable");
     //工具类
     public static final TagKey<Item> KNIVES = registerConventional("tools/knife");
+    public static final TagKey<Item> WRENCHES = registerConventional("tools/wrench");
     //注册用
     private static TagKey<Item> register(String id) {
         return TagKey.of(RegistryKeys.ITEM, new Identifier(ZeroCraft.MODID, id));
